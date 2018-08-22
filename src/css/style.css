@@ -72,8 +72,44 @@ a {
 	color: #fff;
 }
 
+a span {
+	font-weight: 550;
+	padding-right: 25px;
+}
+
 a:hover {
 	color: #d9d9d9;
+}
+
+form {
+	display: "inline-block";
+	margin-left: 20%;
+}
+
+@media only screen and (max-width: 980px) {
+	.hide-mobile {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	.partial-hide-mobile {
+		width: 60%;
+	}
+	form {
+		margin: 0;
+	}
+
+	nav div,
+	nav form,
+	nav a,
+	nav span,
+	div a,
+	a span {
+		margin: 0;
+		padding: 0;
+		display: block-inline;
+	}
 }
 
 .logo {
@@ -92,6 +128,9 @@ a:visited {
 	text-align: center;
 	color: white;
 	border-left: 1px solid;
+	margin-left: 20px;
+	margin-right: 20px;
+	vertical-align: middle;
 }
 
 body {
@@ -108,7 +147,7 @@ hr {
 }
 
 .text-title {
-	font-size: 22px;
+	font-size: 150%;
 	text-align: center;
 	font-weight: 200;
 	color: #ff8c00;
@@ -118,10 +157,6 @@ hr {
 	position: absolute;
 	left: 0;
 	top: 0;
-}
-
-.large {
-	font-size: 18px !important;
 }
 
 .orange {
@@ -185,9 +220,13 @@ hr {
 	color: #2196f3 !important;
 }
 
-.text-center {
+div {
+	font-size: 100%;
+}
+
+div .text-center {
 	color: #fff;
-	font-size: 20px;
+	font-size: 85%;
 	background-color: #ff8c00;
 	font-weight: bold;
 	border-radius: 14px;

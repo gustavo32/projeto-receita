@@ -3,7 +3,6 @@ import logo from "../imagens/logo.png";
 
 class RecommendFrame extends React.Component {
 	render() {
-		const styles = { fontSize: this.props.fontSize + "%" };
 		return (
 			<div className="mb-4">
 				<div style={{ backgroundColor: "white", borderRadius: "4px" }}>
@@ -17,7 +16,7 @@ class RecommendFrame extends React.Component {
 							style={{ width: "100%", borderRadius: "4px 4px 0 0" }}
 						/>
 						<div
-							className="display-topright display-hover large off"
+							className="display-topright display-hover off"
 							style={{ right: 65 }}
 						>
 							<button
@@ -29,26 +28,26 @@ class RecommendFrame extends React.Component {
 							</button>
 						</div>
 						<div
-							className="display-middle display-hover large off"
-							style={{ top: "42%" }}
+							className="display-middle display-hover off"
+							style={{ top: "48%" }}
 						>
-							<div className="text-center animate-opacity" style={styles}>
+							<div className="text-center animate-opacity">
 								<i className="fa fa-clock-o">
 									<span style={{ paddingLeft: 8 }}>10 minutos</span>
 								</i>
 							</div>
 						</div>
 						<div
-							className="display-middle display-hover large off"
-							style={{ top: "58%" }}
+							className="display-middle display-hover off"
+							style={{ top: "64%" }}
 						>
-							<div className="text-center animate-opacity" style={styles}>
+							<div className="text-center animate-opacity">
 								<i className="fa fa-users">
 									<span style={{ paddingLeft: 10 }}>5 porções</span>
 								</i>
 							</div>
 						</div>
-						<div className="display-topright display-hover large off">
+						<div className="display-topright display-hover off">
 							<button
 								type="button"
 								className="animate-opacity btn margin round"
@@ -57,14 +56,12 @@ class RecommendFrame extends React.Component {
 								<i className="fa fa-heart text-red" />
 							</button>
 						</div>
-						<div className="display-bottomleft display-hover large text-white off">
-							<div className="padding animate-opacity" style={styles}>
-								Nome do Autor
-							</div>
+						<div className="display-bottomleft display-hover text-white off">
+							<div className="padding animate-opacity">Nome do Autor</div>
 						</div>
 					</div>
 					<div className="text-title">
-						<span style={styles}>Tutu de Feijão</span>
+						<span>Tutu de Feijão</span>
 					</div>
 				</div>
 			</div>

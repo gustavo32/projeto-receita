@@ -11,17 +11,17 @@ class App extends Component {
 			<div>
 				<NavBar />
 				<div className="row">
-					<div role="main" className="col-md-8">
-						<PrimaryContent />
-					</div>
-					<aside className="col-md-4">
+					<div role="main" className="col-md-6 col-sm-12">
 						<div className="m-4">
 							<ComplementaryContent style={{ backgroundColor: "white" }} />
 						</div>
+					</div>
+					<aside className="col-md-6 col-sm-12">
+						<PrimaryContent />
 					</aside>
-				</div>
-				<div style={{ marginBottom: "6%" }}>
-					<OtherContent />
+					<div className="col-sm-12 col-md-12" style={{ marginBottom: "6%" }}>
+						<OtherContent />
+					</div>
 				</div>
 
 				<Footer />

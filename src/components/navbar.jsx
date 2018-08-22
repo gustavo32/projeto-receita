@@ -8,49 +8,47 @@ class NavBar extends React.Component {
 			fontWeight: 550
 		};
 		return (
-			<nav className="navbar gradient-y-r">
-				<img className="logo" src={logo} href="#" alt="logo" />
-				<div className="nav-inline">
-					<input
-						type="search"
-						className="mr-2"
-						style={{ borderRadius: 100, paddingLeft: 20, height: 30 }}
-						placeholder="Pesquisar..."
-						href="#!"
-					/>
-					<a href="#!">
-						<img
-							className="mr-3"
-							style={{ width: 35, height: 35, cursor: "pointer" }}
-							src={search_icon}
+			<nav className="navbar navbar-expand-lg gradient-y-r">
+				<div className="container-fluid">
+					<img className="logo" src={logo} href="#" alt="logo" />
+					<form action="/">
+						<input
+							type="search"
+							className="hide-mobile"
+							style={{
+								borderRadius: 100,
+								paddingLeft: 20,
+								height: 30
+							}}
+							placeholder="Pesquisar..."
 						/>
-					</a>
-					<a href="#!">
-						<span className="p-3 ml-3" style={font}>
-							Entradas
-						</span>
-					</a>
-					<a href="#!">
-						<span className="p-3" style={font}>
-							Prato Principal
-						</span>
-					</a>
-					<a href="#!">
-						<span className="p-3" style={font}>
-							Sobremesas
-						</span>
-					</a>
-					<a className="mr-2" href="#!">
-						<span className="p-3" style={font}>
-							Drinks
-						</span>
-					</a>
-					<span className="vr" />
-					<a href="#!">
-						<span className="ml-4 m-2" style={font}>
-							Entrar
-						</span>
-					</a>
+
+						<button
+							type="submit"
+							style={{ cursor: "pointer", background: "none" }}
+						>
+							<img src={search_icon} style={{ width: 35, height: 35 }} />
+						</button>
+					</form>
+
+					<div>
+						<a href="#!" className="hide-mobile">
+							<span>Entradas</span>
+						</a>
+						<a href="#!" className="hide-mobile">
+							<span>Prato Principal</span>
+						</a>
+						<a href="#!" className="hide-mobile">
+							<span>Sobremesas</span>
+						</a>
+						<a href="#!" className="hide-mobile">
+							<span style={{ paddingRight: 0 }}>Drinks</span>
+						</a>
+						<span className="vr hide-mobile" />
+						<a href="#!">
+							<span style={{ paddingRight: 0 }}>Entrar</span>
+						</a>
+					</div>
 				</div>
 			</nav>
 		);

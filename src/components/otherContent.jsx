@@ -4,14 +4,14 @@ import RecommendFrame from "./recommendFrame";
 class OtherContent extends React.Component {
 	state = {
 		frames: [
-			{ id: 0, size: 75 },
-			{ id: 1, size: 75 },
-			{ id: 2, size: 75 },
-			{ id: 3, size: 75 },
-			{ id: 4, size: 75 },
-			{ id: 5, size: 75 },
-			{ id: 6, size: 75 },
-			{ id: 7, size: 75 }
+			{ id: 0 },
+			{ id: 1 },
+			{ id: 2 },
+			{ id: 3 },
+			{ id: 4 },
+			{ id: 5 },
+			{ id: 6 },
+			{ id: 7 }
 		]
 	};
 	render() {
@@ -22,12 +22,8 @@ class OtherContent extends React.Component {
 				<div style={{ margin: "0 5% 0 5%" }}>
 					<div className="row mt-4">
 						{this.state.frames.map(frame => (
-							<div key={frame.id} className="col-md-3">
-								<RecommendFrame
-									key={frame.id}
-									fontSize={frame.size}
-									frame={frame}
-								/>
+							<div key={frame.id} className="col-lg-3 col-md-6 col-sm-12">
+								<RecommendFrame key={frame.id} frame={frame} />
 							</div>
 						))}
 					</div>
