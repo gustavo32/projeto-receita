@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import NavBar from "./components/navbar";
+import NavBar from "./components/navbar.jsx";
 import PrimaryContent from "./components/primaryContent";
-import ComplementaryContent from "./components/complementaryContent";
+import List from "./components/list.jsx";
 import OtherContent from "./components/otherContent";
 import Footer from "./components/footer";
 
@@ -13,7 +13,7 @@ class App extends Component {
 				<div className="row">
 					<div role="main" className="col-md-6 col-sm-12">
 						<div className="m-4">
-							<ComplementaryContent style={{ backgroundColor: "white" }} />
+							<List />
 						</div>
 					</div>
 					<aside className="col-md-6 col-sm-12">
