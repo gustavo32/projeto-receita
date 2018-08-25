@@ -1,0 +1,14 @@
+Cache-Control: max-age=900, public
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Sat, 18 Aug 2018 04:32:11 GMT
+Etag: W/"13a582436111341851d2e811a3acf665"
+Server: nginx/1.8.0
+Set-Cookie: datadome=AHrlqAAAAAMAwDWfBOBvh-IAsdysoA==;Path=/;Domain=tudogostoso.com.br;Expires=Sun, 18-Aug-2019 04:32:11 GMT;Max-Age=31536000
+Set-Cookie: datadome=AHrlqAAAAAMAYknPknmP1pcAsdysoA==;Path=/;Domain=tudogostoso.com.br;Expires=Sun, 18-Aug-2019 04:32:11 GMT;Max-Age=31536000
+Status: 200 OK
+X-Datadome: protected
+X-Datadome: protected
+X-Request-Id: f267fdc9eca090790f3992e3e4cd02ab
+X-Runtime: 0.554358
+X-Ua-Compatible: IE=Edge,chrome=1

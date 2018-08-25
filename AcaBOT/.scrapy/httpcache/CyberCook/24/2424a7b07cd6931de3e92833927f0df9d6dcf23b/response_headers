@@ -1,0 +1,11 @@
+Server: nginx
+Date: Fri, 17 Aug 2018 20:44:17 GMT
+Content-Type: text/plain; charset=utf-8
+Last-Modified: Tue, 07 Nov 2017 12:36:28 GMT
+Content-Encoding: gzip
+Accept-Ranges: bytes
+X-Varnish: 2155038678
+Age: 0
+Via: CacheUOL
+X-Cache: MISS
+Vary: Accept-Encoding, User-Agent

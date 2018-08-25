@@ -1,0 +1,14 @@
+setup.py
+AcaBOT/__init__.py
+AcaBOT/items.py
+AcaBOT/middlewares.py
+AcaBOT/pipelines.py
+AcaBOT/settings.py
+AcaBOT/spiders/CyberCook.py
+AcaBOT/spiders/TudoGostoso.py
+AcaBOT/spiders/__init__.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
