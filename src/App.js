@@ -11,15 +11,19 @@ class App extends Component {
 			<div>
 				<NavBar />
 				<div className="row">
-					<div role="main" className="col-md-6 col-sm-12">
-						<div className="m-4">
-							<List />
-						</div>
+					<div className="col-md-6 col-sm-12">
+						<h3 className="mb-0">O exclusivo sistema de busca para você!</h3>
+						<hr />
+						<List />
 					</div>
-					<aside className="col-md-6 col-sm-12">
+					<div className="col-md-6 col-sm-12">
+						<h2 className="mb-0">Recomendações...</h2>
+						<hr />
 						<PrimaryContent />
-					</aside>
+					</div>
 					<div className="col-sm-12 col-md-12" style={{ marginBottom: "6%" }}>
+						<h2 className="mb-0">Destaques deste mês...</h2>
+						<hr />
 						<OtherContent />
 					</div>
 				</div>

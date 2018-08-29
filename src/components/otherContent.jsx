@@ -17,8 +17,6 @@ class OtherContent extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2 className="mt-4">Destaques deste mês...</h2>
-				<hr />
 				<div style={{ margin: "0 5% 0 5%" }}>
 					<div className="row mt-4">
 						{this.state.frames.map(frame => (

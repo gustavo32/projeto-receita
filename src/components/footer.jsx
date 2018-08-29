@@ -3,24 +3,35 @@ import React from "react";
 class Footer extends React.Component {
 	render() {
 		return (
-			<div style={{ backgroundColor: "#222", height: 100 }}>
-				<div className="container-fluid">
+			<div className="footer-bottom">
+				<div className="container">
 					<div className="row">
-						<div
-							className="text-white large m-2 col-sm-2"
-							style={{
-								align: "center",
-								fontWeight: "bold"
-							}}
-						>
-							<span style={{ marginTop: "50%" }}>CHEF YOURSELF</span>
+						<div className="col-sm-6 ">
+							<div className="copyright-text">
+								<p>
+									© 2018 CopyRight:{" "}
+									<span style={{ fontWeight: "bold" }}>Projeto Receita</span>
+								</p>
+							</div>
 						</div>
-						<div
-							className="text-white large col-sm-2"
-							style={{ position: "relative", top: "50%", bottom: "50%" }}
-						>
-							APOIO
-							<hr style={{ margin: "2px solid", color: "white" }} />
+						<div className="col-sm-6">
+							<ul className="social-link pull-right">
+								<li>
+									<a href="">
+										<span className="fa fa-facebook fa-lg" />
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<span className="fa fa-twitter fa-lg" />
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<span className="fa fa-instagram fa-lg" />
+									</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>

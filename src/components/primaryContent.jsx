@@ -9,8 +9,6 @@ class PrimaryContent extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2 className="mb-0">Recomendações...</h2>
-				<hr />
 				<div style={{ margin: "0 5% 0 5%" }}>
 					<div className="row mt-4">
 						{this.state.frames.map(frame => (

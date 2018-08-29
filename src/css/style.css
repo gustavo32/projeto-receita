@@ -6,6 +6,10 @@
 	border: 0;
 }
 
+body {
+	overflow-x: hidden;
+}
+
 @font-face {
 	font-family: Arciform;
 	src: url(Arciform.otf);
@@ -37,7 +41,12 @@ a {
 }
 
 /* Style the list items */
-ul li {
+#myUL {
+	max-height: 55vh;
+	overflow: auto;
+}
+
+#myUL li {
 	cursor: pointer;
 	position: relative;
 	padding: 12px 8px 12px 40px;
@@ -54,12 +63,12 @@ ul li {
 }
 
 /* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
+#myUL li:nth-child(odd) {
 	background: #f9f9f9;
 }
 
 /* Darker background-color on hover */
-ul li:hover {
+#myUL li:hover {
 	background: #ddd;
 }
 
@@ -68,17 +77,18 @@ ul li:hover {
 	position: absolute;
 	right: 0;
 	top: 0;
+	bottom: 0;
 	padding: 12px 16px 12px 16px;
 }
 
 .close:hover {
 	background-color: #f44336;
-	color: white;
+	color: #ffffff;
 }
 
 /* Style the header */
 .header {
-	background-color: #f44336;
+	background-color: #ff8c00;
 	padding: 30px 40px;
 	color: white;
 	text-align: center;
@@ -95,7 +105,7 @@ ul li:hover {
 input {
 	margin: 0;
 	border: none;
-	border-radius: 4px;
+	border-radius: 4px 0 0 4px;
 	width: 75%;
 	padding: 10px;
 	float: left;
@@ -112,7 +122,7 @@ input {
 	font-size: 16px;
 	cursor: pointer;
 	transition: 0.3s;
-	border-radius: 4px;
+	border-radius: 0 4px 4px 0;
 }
 
 .addBtn:hover {
@@ -364,4 +374,76 @@ div .text-center {
 
 .display-container {
 	position: relative;
+}
+
+.footer-bottom {
+	padding-top: 10px;
+	border-top: 1px solid #666;
+	background: #1e1e1e;
+	height: 60px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.copyright-text p {
+	color: #ccc;
+	margin-top: 9px;
+	margin-bottom: 0;
+}
+
+.social-link li {
+	display: inline-block;
+	margin: 0 5px;
+}
+.social-link li a {
+	color: #ccc;
+	width: 40px;
+	height: 40px;
+	line-height: 45px;
+	text-align: center;
+	display: inline-block;
+	font-size: 18px;
+	transition: 0.5s;
+}
+
+.social-link li a:hover {
+	color: #555555;
+}
+
+.dropdown-content {
+	right: 0;
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 250px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding: 12px 16px;
+	border-radius: 4px;
+	z-index: 1;
+}
+
+.dropdown-content span {
+	font-size: 14px;
+	font-weight: 300;
+	color: black;
+	cursor: default;
+}
+
+.dropdown-content input {
+	cursor: default;
+	height: 30px;
+	border-radius: 4px;
+	border: 1px solid #dddddd;
+	font-size: 14px;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+a.dropdown {
+	display: inline-block;
+}
+
+.dropdown hr {
+	display: inline-block;
 }

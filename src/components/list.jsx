@@ -3,21 +3,19 @@ import React, { Component } from "react";
 class List extends React.Component {
 	render() {
 		return (
-			<div>
-				<h3>Nosso exclusivo sistema de busca para você!</h3>
-				<hr />
-				<p>
-					Digite alguns dos seus alimentos aqui e veja a mágica acontecer...
-				</p>
-				<div id="myDIV" className="header">
-					<h5 style={{ margin: "5px" }} />
-					<input type="text" id="myInput" placeholder="Title..." />
-					<span onClick={this.newElement} className="addBtn">
-						Ok!
-					</span>
-				</div>
+			<div className="mt-4">
+				<div style={{ margin: "0 5% 0 5%" }}>
+					<div id="myDIV" className="header">
+						<div>
+							<input type="text" id="myInput" placeholder="Digite um item..." />
+							<span onClick={this.newElement} className="addBtn">
+								<i className="fa fa-arrow-right" />
+							</span>
+						</div>
+					</div>
 
-				<ul id="myUL" />
+					<ul id="myUL" />
+				</div>
 			</div>
 		);
 	}
@@ -33,10 +31,12 @@ class List extends React.Component {
 			document.getElementById("myUL").appendChild(li);
 		}
 		document.getElementById("myInput").value = "";
+		document.getElementById("myInput").focus();
 
 		let span = document.createElement("SPAN");
 		let txt = document.createTextNode("\u00D7");
 		span.className = "close";
+		span.style.color.hover = "white";
 		span.appendChild(txt);
 		li.appendChild(span);
 

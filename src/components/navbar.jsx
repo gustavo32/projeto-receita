@@ -45,8 +45,22 @@ class NavBar extends React.Component {
 							<span style={{ paddingRight: 0 }}>Drinks</span>
 						</a>
 						<span className="vr hide-mobile" />
-						<a href="#!">
-							<span style={{ paddingRight: 0 }}>Entrar</span>
+
+						<a className="dropdown" href="#!">
+							<span style={{ paddingRight: 0 }}>
+								Entrar
+								<ul className="dropdown-content">
+									<li>
+										<span>Login</span>
+										<input type="text" />
+									</li>
+									<li>
+										<span>Senha</span>
+										<input type="password" />
+									</li>
+									<hr />
+								</ul>
+							</span>
 						</a>
 					</div>
 				</div>
