@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import logo from "../imagens/logo.png";
 import search_icon from "../imagens/search-icon.png";
+import Facebook from "./facebook";
+import Google from "./google";
 
 class NavBar extends React.Component {
 	render() {
@@ -51,14 +53,28 @@ class NavBar extends React.Component {
 								Entrar
 								<ul className="dropdown-content">
 									<li>
-										<span>Login</span>
-										<input type="text" />
+										<input type="text" autoComplete="on" placeholder="Email" />
 									</li>
 									<li>
-										<span>Senha</span>
-										<input type="password" />
+										<input type="password" placeholder="Senha" />
+									</li>
+									<span>Esqueceu sua senha?</span>
+									<button className="login-btn">Entrar</button>
+									<hr />
+									<li>
+										<Facebook className="facebook" />
+									</li>
+									<li>
+										<Google />
 									</li>
 									<hr />
+									<li>
+										<a href="/cadastrar">
+											<button className="signup-btn" href="/cadastrar">
+												Cadastre-se
+											</button>
+										</a>
+									</li>
 								</ul>
 							</span>
 						</a>

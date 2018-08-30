@@ -36,7 +36,6 @@ class List extends React.Component {
 		let span = document.createElement("SPAN");
 		let txt = document.createTextNode("\u00D7");
 		span.className = "close";
-		span.style.color.hover = "white";
 		span.appendChild(txt);
 		li.appendChild(span);
 

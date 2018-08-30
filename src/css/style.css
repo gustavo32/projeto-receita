@@ -384,6 +384,7 @@ div .text-center {
 	overflow: hidden;
 	white-space: nowrap;
 }
+
 .copyright-text p {
 	color: #ccc;
 	margin-top: 9px;
@@ -414,9 +415,10 @@ div .text-center {
 	display: none;
 	position: absolute;
 	background-color: #f9f9f9;
+	cursor: default;
 	min-width: 250px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	padding: 12px 16px;
+	padding: 10px;
 	border-radius: 4px;
 	z-index: 1;
 }
@@ -425,14 +427,19 @@ div .text-center {
 	font-size: 14px;
 	font-weight: 300;
 	color: black;
-	cursor: default;
+	color: orange;
+	cursor: pointer;
+	margin: 0px 0px 0px 10px;
+	padding: 0;
+	line-height: 50px;
 }
 
 .dropdown-content input {
-	cursor: default;
 	height: 30px;
 	border-radius: 4px;
 	border: 1px solid #dddddd;
+	width: 90%;
+	margin: 10px 20px 5px 10px;
 	font-size: 14px;
 }
 
@@ -446,4 +453,55 @@ a.dropdown {
 
 .dropdown hr {
 	display: inline-block;
+}
+
+.login-btn {
+	margin: 10px 16px 0 0;
+	background-color: #ff8c00;
+	color: white;
+	cursor: pointer;
+	float: right;
+	width: 70px;
+	height: 30px;
+	border-radius: 4px;
+}
+
+.signup-btn {
+	margin: 10px 70px 10px 70px;
+	background-color: #ff8c00;
+	color: white;
+	cursor: pointer;
+	width: 120px;
+	height: 30px;
+	border-radius: 4px;
+}
+
+.login-btn:hover {
+	color: #fdfdfd;
+	background-color: #f98c06;
+}
+
+.facebook {
+	width: 90%;
+	text-align: center;
+	cursor: pointer;
+	height: 30px;
+	font-size: 16px;
+	line-height: 32px;
+	background-color: #4267b2;
+	color: white;
+	border-radius: 25px;
+}
+
+.google {
+	width: 90%;
+	margin-left: 10px;
+	text-align: center;
+	cursor: pointer;
+	height: 30px;
+	font-size: 16px;
+	line-height: 32px;
+	background-color: #d62d20;
+	color: white;
+	border-radius: 25px;
 }
