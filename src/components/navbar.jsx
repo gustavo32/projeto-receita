@@ -48,12 +48,12 @@ class NavBar extends React.Component {
 						</a>
 						<span className="vr hide-mobile" />
 
-						<a className="dropdown" href="#!">
-							<span style={{ paddingRight: 0 }}>
+						<span className="dropdown">
+							<span>
 								Entrar
 								<ul className="dropdown-content">
 									<li>
-										<input type="text" autoComplete="on" placeholder="Email" />
+										<input type="email" autoComplete="on" placeholder="Email" />
 									</li>
 									<li>
 										<input type="password" placeholder="Senha" />
@@ -77,7 +77,7 @@ class NavBar extends React.Component {
 									</li>
 								</ul>
 							</span>
-						</a>
+						</span>
 					</div>
 				</div>
 			</nav>

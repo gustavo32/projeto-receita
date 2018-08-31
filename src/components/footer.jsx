@@ -10,7 +10,9 @@ class Footer extends React.Component {
 							<div className="copyright-text">
 								<p>
 									© 2018 CopyRight:{" "}
-									<span style={{ fontWeight: "bold" }}>Projeto Receita</span>
+									<a href="/" style={{ fontWeight: "bold" }}>
+										Projeto Receita
+									</a>
 								</p>
 							</div>
 						</div>

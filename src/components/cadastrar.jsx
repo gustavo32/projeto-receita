@@ -4,21 +4,35 @@ import Footer from "./footer";
 class Cadastrar extends React.Component {
 	render() {
 		return (
-			<React.Fragment>
-				<div
-					style={{
-						height: "500px",
-						width: "500px",
-						margin: "0 auto",
-						backgroundColor: "white"
-					}}
-				>
-					<div style={{}}>
-						<span style={{ top: "500px" }}>Teste</span>
+			<div className="background-cadastro">
+				<div className="cadastro">
+					<div className="header-titulo">
+						<div className="title-cadastro">Cadastro</div>
+					</div>
+					<div className="cadastro-content">
+						<label>Nome</label>
+						<input type="text" />
+						<label>Email</label>
+						<input type="email" autoComplete="on" />
+						<label>Senha</label>
+						<input type="password" placeholder="Pelo menos 6 caracteres" />
+						<label>Confirmar senha</label>
+						<input type="password" />
+						<button
+							className="signup-btn"
+							style={{
+								width: "60%",
+								margin: "0 55px 0 55px",
+								marginTop: "15px"
+							}}
+						>
+							Cadastrar
+						</button>
 					</div>
 				</div>
-				/>
-			</React.Fragment>
+
+				<Footer />
+			</div>
 		);
 	}
 }

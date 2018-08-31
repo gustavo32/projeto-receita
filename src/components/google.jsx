@@ -8,7 +8,7 @@ class Google extends React.Component {
 	};
 
 	responseGoogle = response => {
-		console.log(response);
+		console.log(response.id_token);
 	};
 
 	render() {

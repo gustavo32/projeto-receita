@@ -8,10 +8,6 @@ import "font-awesome/css/font-awesome.min.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Cadastrar from "./components/cadastrar";
 
-const responseFacebook = response => {
-	console.log(response);
-};
-
 ReactDOM.render(
 	<BrowserRouter>
 		<Switch>
