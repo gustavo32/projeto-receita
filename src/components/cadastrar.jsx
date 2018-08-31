@@ -21,9 +21,10 @@ class Cadastrar extends React.Component {
 						<button
 							className="signup-btn"
 							style={{
-								width: "60%",
-								margin: "0 55px 0 55px",
-								marginTop: "15px"
+								width: "40%",
+								margin: "0 100px 0 100px",
+								marginTop: "15px",
+								fontWeight: "bold"
 							}}
 						>
 							Cadastrar

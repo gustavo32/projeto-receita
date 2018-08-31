@@ -12,6 +12,11 @@ body {
 }
 
 @font-face {
+	font-family: Dosis;
+	src: url(fogtwono5.regular.otf);
+}
+
+@font-face {
 	font-family: Arciform;
 	src: url(Arciform.otf);
 }
@@ -32,13 +37,19 @@ body {
 
 h2 {
 	color: black;
-	font-family: Arciform;
+	font-family: Dosis;
 	margin: 5% 0 0 10%;
+}
+
+h3::first-letter,
+h2::first-letter {
+	font-size: 40px;
 }
 
 h3 {
 	color: black;
-	font-family: Arciform;
+	font-family: Dosis;
+	font-size: 30px;
 	margin: 5% 0 0 10%;
 }
 
@@ -89,7 +100,7 @@ a {
 
 .close:hover {
 	background-color: #f44336;
-	color: #ffffff;
+	color: #ffffff !important;
 }
 
 /* Style the header */
@@ -494,7 +505,7 @@ span.dropdown:hover {
 .login-btn:hover,
 .signup-btn:hover {
 	color: #fdfdfd;
-	background-color: #f98c06;
+	background-color: #e67e00;
 }
 
 .facebook {
@@ -564,7 +575,7 @@ span.dropdown:hover {
 }
 
 .background-cadastro {
-	background-image: url("../imagens/cadastro-background.png");
+	background-image: url("../imagens/cadastro-background-small.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 	color: black;
