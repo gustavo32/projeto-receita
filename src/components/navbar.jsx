@@ -13,14 +13,15 @@ class NavBar extends React.Component {
 			<nav className="navbar navbar-expand-lg gradient-y-r">
 				<div className="container-fluid">
 					<img className="logo" src={logo} href="#" alt="logo" />
-					<form action="/">
+					<form action="/" style={{ marginLeft: "120px" }}>
 						<input
 							type="search"
 							className="hide-mobile"
 							style={{
 								borderRadius: 100,
 								paddingLeft: 20,
-								height: 30
+								height: 30,
+								width: "280px"
 							}}
 							placeholder="Pesquisar..."
 						/>
