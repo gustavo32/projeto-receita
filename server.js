@@ -3,24 +3,29 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const items = require("./routes/api/items");
+const receitas = require("./routes/api/receitas");
 
 const app = express();
 
+// Bodyparser Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-const bd = require("./config/keys").mongoURI;
+// DB Config
+const db = require("./config/keys").mongoURI;
 
+//Connect Mongo
 mongoose
-	.connect(
-		bd,
-		{ useNewUrlParser: true }
-	)
-	.then(() => console.log("MongoDB connected...."))
-	.catch(err => console.log(err));
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("Conectado ao BD."))
+  .catch(err => console.log(err));
 
-app.use("api/items", items);
+// Use Routes
+app.use("/api/items", items);
+app.use("/api/receitas", receitas);
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Server started on ${port}`));
+app.listen(port, () => console.log(`Server iniciado na porta ${port}`));

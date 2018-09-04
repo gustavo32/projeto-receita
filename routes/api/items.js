@@ -1,27 +1,27 @@
 const express = require("express");
 const router = express.Router();
 
-// Item Model
-const Item = require("../../models/Item");
+//Item Model
+const Item = require("../../models/Items");
 
-// @route   GET api/items
-// @desc    Get All Items
-// @access  Public
+// @route  GET api/items
+// @desc   Get all Items
+// @access Public
 router.get("/", (req, res) => {
-	Item.find()
-		.sort({ date: -1 })
-		.then(items => res.json(items));
+  Item.find()
+    .sort({ date: -1 })
+    .then(items => res.json(items));
 });
 
-// @route   POST api/items
-// @desc    Create An Item
-// @access  Public
+// @route  POST api/items
+// @desc   Post an Items
+// @access Public
 router.post("/", (req, res) => {
-	const newItem = new Item({
-		name: req.body.name
-	});
+  const newItem = new Item({
+    name: req.body.name
+  });
 
-	newItem.save().then(item => res.json(item));
+  newItem.save().then(item => res.json(item));
 });
 
 module.exports = router;
