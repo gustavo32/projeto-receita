@@ -11,7 +11,7 @@ class RecommendFrame extends React.Component {
 						style={{ transition: "0.5s", width: "100%" }}
 					>
 						<img
-							src={logo}
+							src={this.props.img}
 							alt="receita"
 							style={{ width: "100%", borderRadius: "4px 4px 0 0" }}
 						/>
@@ -33,7 +33,9 @@ class RecommendFrame extends React.Component {
 						>
 							<div className="text-center animate-opacity">
 								<i className="fa fa-clock-o">
-									<span style={{ paddingLeft: 8 }}>10 minutos</span>
+									<span style={{ paddingLeft: 8 }}>
+										{this.props.tempo} minutos
+									</span>
 								</i>
 							</div>
 						</div>
@@ -43,7 +45,9 @@ class RecommendFrame extends React.Component {
 						>
 							<div className="text-center animate-opacity">
 								<i className="fa fa-users">
-									<span style={{ paddingLeft: 10 }}>5 porções</span>
+									<span style={{ paddingLeft: 10 }}>
+										{this.props.porcoes} porções
+									</span>
 								</i>
 							</div>
 						</div>
@@ -57,11 +61,11 @@ class RecommendFrame extends React.Component {
 							</button>
 						</div>
 						<div className="display-bottomleft display-hover text-white off">
-							<div className="padding animate-opacity">Nome do Autor</div>
+							<div className="padding animate-opacity">{this.props.autor}</div>
 						</div>
 					</div>
 					<div className="text-title">
-						<span>Tutu de Feijão</span>
+						<span>{this.props.titulo}</span>
 					</div>
 				</div>
 			</div>
