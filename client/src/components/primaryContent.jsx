@@ -11,12 +11,12 @@ class PrimaryContent extends React.Component {
 	}
 
 	render() {
-		const { receitas } = this.props.item;
+		const { receitasPrimary } = this.props.item;
 		return (
 			<div>
 				<div style={{ margin: "0 5% 0 5%" }}>
 					<div className="row mt-4">
-						{receitas.map(
+						{receitasPrimary.map(
 							({ id, porcoes, tempo_preparo, titulo, img_src, nome_autor }) => (
 								<div key={id} className="col-lg-6 col-sm-12">
 									<RecommendFrame
