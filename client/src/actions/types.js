@@ -1,1 +1,3 @@
-export const GET_ITEMS = "GET_ITEMS";
+export const GET_ITEMS_PRIMARY = "GET_ITEMS_PRIMARY";
+export const GET_ITEMS_OTHER = "GET_ITEMS_OTHER";
+export const ITEMS_LOADING = "ITEMS_LOADING";

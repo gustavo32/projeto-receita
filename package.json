@@ -1,25 +1,28 @@
 {
-	"name": "projeto-receita",
-	"version": "1.0.0",
-	"description": "Projeto site receitas",
-	"main": "server.js",
-	"scripts": {
-		"client-install": "npm install --prefix client",
-		"start": "node server.js",
-		"server": "nodemon server.js",
-		"client": "npm start --prefix client",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
-	},
-	"author": "Projeto Receita",
-	"license": "MIT",
-	"dependencies": {
-		"body-parser": "^1.18.3",
-		"compass": "^0.1.1",
-		"concurrently": "^4.0.1",
-		"express": "^4.16.3",
-		"mongoose": "^5.2.12"
-	},
-	"devDependencies": {
-		"nodemon": "^1.18.4"
-	}
+  "name": "projeto-receita",
+  "version": "1.0.0",
+  "description": "Projeto site receitas",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Projeto Receita",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compass": "^0.1.1",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.12",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0"
+  },
+  "devDependencies": {
+    "file-loader": "^2.0.0",
+    "nodemon": "^1.18.4"
+  }
 }

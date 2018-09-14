@@ -1,7 +1,29 @@
-import { GET_ITEMS } from "./types";
+import {
+	GET_ITEMS_PRIMARY,
+	GET_ITEMS_OTHER,
+	ITEMS_LOADING
+} from "./types";
+import axios from 'axios';
 
-export const getItems = () => {
+export const getItemsPrimary = () => dispatch => {
+	dispatch(setItemsLoading());
+	axios.get('/api/receitas/primaryContent').then(res => dispatch({
+		type: GET_ITEMS_PRIMARY,
+		payload: res.data
+	}))
+};
+
+export const getItemsOther = () => dispatch => {
+	dispatch(setItemsLoading());
+	axios.get('/api/receitas/otherContent').then(res => dispatch({
+		type: GET_ITEMS_OTHER,
+		payload: res.data
+	}))
+};
+
+
+export const setItemsLoading = () => {
 	return {
-		type: GET_ITEMS
+		type: ITEMS_LOADING
 	};
 };

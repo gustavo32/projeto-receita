@@ -8,11 +8,11 @@ const Item = require("../../models/Items");
 // @desc   Get all Items
 // @access Public
 router.get("/", (req, res) => {
-  Item.find()
-    .sort({ date: -1 })
+  Item.find().limit(4)
     .then(items => res.json(items));
 });
 
+/*
 // @route  POST api/items
 // @desc   Post an Items
 // @access Public
@@ -23,5 +23,5 @@ router.post("/", (req, res) => {
 
   newItem.save().then(item => res.json(item));
 });
-
+*/
 module.exports = router;
