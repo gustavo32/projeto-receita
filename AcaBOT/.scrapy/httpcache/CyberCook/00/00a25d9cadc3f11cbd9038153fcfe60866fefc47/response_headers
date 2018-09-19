@@ -1,0 +1,11 @@
+Server: nginx
+Date: Sun, 19 Aug 2018 19:01:52 GMT
+Content-Type: image/jpeg
+Cache-Control: max-age=2592000
+Expires: Wed, 12 Sep 2018 12:45:13 GMT
+Last-Modified: Fri, 01 Dec 2017 20:24:27 GMT
+X-Varnish: 2205737749 2069483270
+Age: 540999
+Via: CacheUOL
+X-Cache: HIT
+Accept-Ranges: bytes

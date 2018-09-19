@@ -1,0 +1,11 @@
+Server: nginx
+Date: Wed, 12 Sep 2018 17:33:42 GMT
+Content-Type: text/html; charset=UTF-8
+Cache-Control: max-age=14400, public
+Content-Encoding: gzip
+Accept-Ranges: bytes
+X-Varnish: 2546975205 2546763152
+Age: 470
+Via: CacheUOL
+X-Cache: HIT
+Vary: Accept-Encoding, User-Agent

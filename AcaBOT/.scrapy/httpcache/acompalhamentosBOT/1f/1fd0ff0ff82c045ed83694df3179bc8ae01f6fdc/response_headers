@@ -1,0 +1,10 @@
+Server: nginx
+Date: Wed, 12 Sep 2018 17:20:20 GMT
+Content-Type: text/html; charset=UTF-8
+Cache-Control: max-age=14400, public
+Location: https://cybercook.uol.com.br/resultado.php?q=acompalhamentos
+Accept-Ranges: bytes
+X-Varnish: 2298161093
+Age: 0
+Via: CacheUOL
+X-Cache: MISS
