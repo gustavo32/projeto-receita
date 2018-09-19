@@ -302,7 +302,6 @@ hr {
 	display: inline-block;
 	padding: 8px 16px;
 	vertical-align: middle;
-	overflow: hidden;
 	text-decoration: none;
 	color: inherit;
 	background-color: inherit;
@@ -325,6 +324,14 @@ hr {
 
 .text-white {
 	color: #fff !important;
+}
+
+.text-white-hover-red {
+	color: #fff;
+}
+
+.text-white-hover-red:hover {
+	color: #f44336;
 }
 
 .text-blue {
@@ -374,7 +381,7 @@ div .text-center {
 }
 
 .margin {
-	margin: 16px !important;
+	margin: 16px;
 }
 
 .btn:hover {

@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { putLike } from "../actions/itemActions";
+import PropTypes from "prop-types";
 
 class RecommendFrame extends React.Component {
   render() {
@@ -40,10 +43,12 @@ class RecommendFrame extends React.Component {
             <div className="display-topright display-hover off">
               <button
                 type="button"
-                className="animate-opacity btn margin round"
+                className="animate-opacity btn margin text-white-hover-red"
                 title="Amei"
+                onClick={this.addLike}
               >
-                <i className="fa fa-heart text-red" />
+                {this.getLikes()}
+                <i className="fa fa-heart" />
               </button>
             </div>
             <div className="display-bottomleft display-hover text-white off">
@@ -57,6 +62,29 @@ class RecommendFrame extends React.Component {
       </div>
     );
   }
+
+  addLike = () => {};
+
+  getLikes() {
+    if (this.props.likes > 5) {
+      return (
+        <span
+          class="badge badge-pill badge-danger"
+          style={{
+            position: "absolute",
+            border: 0,
+            margin: 0,
+            padding: "5px",
+            right: "10%",
+            top: "10%"
+          }}
+        >
+          {this.props.likes}
+        </span>
+      );
+    }
+  }
+
   tempo() {
     if (this.props.tempo) {
       return (
@@ -109,4 +137,16 @@ class RecommendFrame extends React.Component {
   }
 }
 
-export default RecommendFrame;
+RecommendFrame.propTypes = {
+  putLike: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  item: state.item
+});
+
+export default connect(
+  mapStateToProps,
+  { putLike }
+)(RecommendFrame);

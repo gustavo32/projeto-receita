@@ -12,6 +12,18 @@ router.get("/otherContent", (req, res) => {
   Receita.find().limit(8).skip(8).then(receitas => res.json(receitas));
 });
 
+router.put("/like", (req, res) => {
+
+  Receita.findById(req.params.id, function (err, receita) {
+    if (err)
+      res.send(err);
+
+    receita.likes_total = req.body.likes_total;
+    /*
+     receita.save().then(item => res.json(item));*/
+  });
+});
+
 /*
 router.post("/", (req, res) => {
   const newReceita = new Receita({

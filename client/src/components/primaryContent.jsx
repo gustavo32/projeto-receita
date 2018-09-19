@@ -23,6 +23,7 @@ class PrimaryContent extends React.Component {
                 tempo_de_preparo,
                 titulo,
                 image_urls,
+                likes_total,
                 autor
               }) => (
                 <div key={_id} className="col-lg-6 col-sm-12">
@@ -32,6 +33,7 @@ class PrimaryContent extends React.Component {
                     tempo={tempo_de_preparo}
                     titulo={titulo}
                     img={image_urls}
+                    likes={likes_total}
                     autor={autor}
                   />
                 </div>

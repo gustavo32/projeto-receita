@@ -1,7 +1,8 @@
 import {
 	GET_ITEMS_PRIMARY,
 	GET_ITEMS_OTHER,
-	ITEMS_LOADING
+	ITEMS_LOADING,
+	PUT_LIKE
 } from "./types";
 import axios from 'axios';
 
@@ -21,6 +22,13 @@ export const getItemsOther = () => dispatch => {
 	}))
 };
 
+export const putLike = (id, item) => dispatch => {
+	axios.put('/api/receitas/like/${id}', item).then(res => dispatch({
+		type: PUT_LIKE,
+		id: id,
+		payload: res.data
+	}))
+};
 
 export const setItemsLoading = () => {
 	return {

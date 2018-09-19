@@ -2,16 +2,19 @@
 import {
   GET_ITEMS_PRIMARY,
   GET_ITEMS_OTHER,
-  ITEMS_LOADING
+  ITEMS_LOADING,
+  PUT_LIKE
 } from "../actions/types";
+import update from 'react-addons-update';
 
 const initalState = {
   receitasPrimary: [],
   receitasOther: [],
+  receita: [],
   loading: false
 };
 
-export default function(state = initalState, action) {
+export default function (state = initalState, action) {
   switch (action.type) {
     case GET_ITEMS_PRIMARY:
       return {
@@ -30,6 +33,18 @@ export default function(state = initalState, action) {
         ...state,
         loading: true
       };
+    case PUT_LIKE:
+      return update(state, {
+        receita: {
+          [action.id]: {
+            likes_total: {
+              $set: action.payload
+            }
+          }
+        }
+      });
+
+
     default:
       return state;
   }
