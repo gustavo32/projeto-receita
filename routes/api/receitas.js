@@ -3,25 +3,26 @@ const router = express.Router();
 
 const Receita = require("../../models/Receitas");
 
-
 router.get("/primaryContent", (req, res) => {
-  Receita.find().limit(4).then(receitas => res.json(receitas));
+  Receita.find()
+    .limit(4)
+    .then(receitas => res.json(receitas));
 });
 
 router.get("/otherContent", (req, res) => {
-  Receita.find().limit(8).skip(8).then(receitas => res.json(receitas));
+  Receita.find()
+    .limit(8)
+    .skip(8)
+    .then(receitas => res.json(receitas));
 });
 
-router.put("/like", (req, res) => {
-
-  Receita.findById(req.params.id, function (err, receita) {
-    if (err)
-      res.send(err);
-
-    receita.likes_total = req.body.likes_total;
-    /*
-     receita.save().then(item => res.json(item));*/
-  });
+router.put("/:id", (req, res) => {
+  Receita.findById(req.params.id)
+    .updateOne(
+      { _id: req.params.id },
+      { $inc: { likes_mensais: 1, likes_total: 1 } }
+    )
+    .then(item => res.json({ success: true }));
 });
 
 /*
