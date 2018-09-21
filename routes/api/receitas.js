@@ -17,22 +17,14 @@ router.get("/otherContent", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  Receita.findById(req.params.id)
-    .updateOne(
-      { _id: req.params.id },
-      { $inc: { likes_mensais: 1, likes_total: 1 } }
-    )
-    .then(item => res.json({ success: true }));
+  Receita.updateOne(
+    { _id: req.params.id },
+    { $inc: { likes_total: 1 } },
+    {},
+    (err, numberAffected) => {
+      res.send("sucesso");
+    }
+  );
 });
 
-/*
-router.post("/", (req, res) => {
-  const newReceita = new Receita({
-    titulo: req.body.titulo,
-    categoria: req.body.categoria
-  });
-
-  newReceita.save().then(item => res.json(item));
-});
-*/
 module.exports = router;
