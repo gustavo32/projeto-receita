@@ -29,6 +29,7 @@ class PrimaryContent extends React.Component {
                 <div key={_id} className="col-lg-6 col-sm-12">
                   <RecommendFrame
                     key={_id}
+                    id={_id}
                     porcoes={porcoes}
                     tempo={tempo_de_preparo}
                     titulo={titulo}

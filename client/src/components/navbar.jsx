@@ -3,6 +3,7 @@ import logo from "../imagens/logo.png";
 import search_icon from "../imagens/search-icon.png";
 import Facebook from "./facebook";
 import Google from "./google";
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   render() {
@@ -70,11 +71,9 @@ class NavBar extends React.Component {
                   </li>
                   <hr />
                   <li>
-                    <a href="/cadastrar">
-                      <button className="signup-btn" href="/cadastrar">
-                        Cadastre-se
-                      </button>
-                    </a>
+                    <button className="signup-btn">
+                      <Link to="/cadastrar">Cadastrar</Link>
+                    </button>
                   </li>
                 </ul>
               </span>

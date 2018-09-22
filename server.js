@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const receitas = require("./routes/api/receitas");
+const users = require("./routes/api/signin");
 
 const app = express();
 
@@ -15,7 +16,8 @@ const db = require("./config/keys").mongoURI;
 //Connect Mongo
 mongoose
   .connect(
-    db, {
+    db,
+    {
       useNewUrlParser: true
     }
   )
@@ -24,6 +26,7 @@ mongoose
 
 // Use Routes
 app.use("/api/receitas", receitas);
+app.use("/api/account/", users);
 
 const port = process.env.PORT || 5000;
 

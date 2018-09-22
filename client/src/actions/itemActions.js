@@ -26,12 +26,11 @@ export const getItemsOther = () => dispatch => {
   );
 };
 
-export const putLike = (id, item) => dispatch => {
-  axios.put(`/api/receitas/${id}`, item).then(res =>
+export const putLike = id => dispatch => {
+  axios.put(`/api/receitas/${id}`).then(res =>
     dispatch({
       type: PUT_LIKE,
-      id: id,
-      payload: res.data
+      payload: res.id
     })
   );
 };

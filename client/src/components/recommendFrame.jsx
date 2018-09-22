@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 class RecommendFrame extends React.Component {
   render() {
+    const { receita } = this.props.item;
     return (
       <div className="mb-4">
         <div
@@ -45,7 +46,7 @@ class RecommendFrame extends React.Component {
                 type="button"
                 className="animate-opacity btn margin text-white-hover-red"
                 title="Amei"
-                onClick={this.addLike}
+                onClick={() => this.addLike(this.props.id)}
               >
                 {this.getLikes()}
                 <i className="fa fa-heart" />
@@ -63,13 +64,15 @@ class RecommendFrame extends React.Component {
     );
   }
 
-  addLike = () => {};
+  addLike = id => {
+    this.props.putLike(id);
+  };
 
   getLikes() {
     if (this.props.likes > 5) {
       return (
         <span
-          class="badge badge-pill badge-danger"
+          className="badge badge-pill badge-danger"
           style={{
             position: "absolute",
             border: 0,
