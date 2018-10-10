@@ -125,7 +125,7 @@ class RecommendFrame extends React.Component {
       return (
         <div
           className="display-middle display-hover off"
-          style={{ top: "54%" }}
+          style={{ top: "50%" }}
         >
           <div className="text-center animate-opacity" id="porcoes">
             <i className="fa fa-users">
