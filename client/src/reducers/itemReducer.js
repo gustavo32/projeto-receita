@@ -3,14 +3,20 @@ import {
   GET_ITEMS_PRIMARY,
   GET_ITEMS_OTHER,
   ITEMS_LOADING,
-  PUT_LIKE
+  PUT_LIKE,
+  SET_TOKEN,
+  SET_LOGIN
 } from "../actions/types";
 
 const initalState = {
   receitasPrimary: [],
   receitasOther: [],
   receita: [],
-  loading: false
+  loading: false,
+  token: "",
+  signInEmail: "",
+  signInPassword: "",
+  signInError: ""
 };
 
 export default function(state = initalState, action) {
@@ -36,6 +42,20 @@ export default function(state = initalState, action) {
       return {
         ...state
       };
+    case SET_TOKEN:
+      return {
+        ...state,
+        token: action.payload
+      };
+    case SET_LOGIN:
+      return {
+        ...state,
+        signInEmail: action.email,
+        signInPassword: action.senha,
+        signInError: action.payload.message,
+        token: action.payload.token
+      };
+
     default:
       return state;
   }

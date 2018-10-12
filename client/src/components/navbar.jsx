@@ -1,9 +1,7 @@
 import React from "react";
 import logo from "../imagens/logo.png";
 import search_icon from "../imagens/search-icon.png";
-import Facebook from "./facebook";
-import Google from "./google";
-import { Link } from "react-router-dom";
+import Login from "./login";
 
 class NavBar extends React.Component {
   render() {
@@ -49,35 +47,7 @@ class NavBar extends React.Component {
               <span style={{ paddingRight: 0 }}>Drinks</span>
             </a>
             <span className="vr hide-mobile" />
-
-            <span className="dropdown">
-              <span>
-                Entrar
-                <ul className="dropdown-content">
-                  <li>
-                    <input type="email" autoComplete="on" placeholder="Email" />
-                  </li>
-                  <li>
-                    <input type="password" placeholder="Senha" />
-                  </li>
-                  <span>Esqueceu sua senha?</span>
-                  <button className="login-btn">Entrar</button>
-                  <hr />
-                  <li>
-                    <Facebook className="facebook" />
-                  </li>
-                  <li>
-                    <Google />
-                  </li>
-                  <hr />
-                  <li>
-                    <button className="signup-btn">
-                      <Link to="/cadastrar">Cadastrar</Link>
-                    </button>
-                  </li>
-                </ul>
-              </span>
-            </span>
+            <Login />
           </div>
         </div>
       </nav>
