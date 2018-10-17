@@ -48,7 +48,18 @@ router.post("/signup", (req, res) => {
       newUser.email = email;
       newUser.nome = nome;
       newUser.senha = newUser.generateHash(senha);
-      newUser.save().then(item => res.json(item));
+      newUser.save((err, user) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: "Erro no Servidor"
+          });
+        }
+        return res.send({
+          success: true,
+          message: "Cadastro efetuado"
+        });
+      });
     }
   );
 });

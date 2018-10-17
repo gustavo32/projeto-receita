@@ -5,7 +5,8 @@ import {
   ITEMS_LOADING,
   PUT_LIKE,
   SET_TOKEN,
-  SET_LOGIN
+  SET_LOGIN,
+  SET_SIGNUP
 } from "../actions/types";
 
 const initalState = {
@@ -16,7 +17,12 @@ const initalState = {
   token: "",
   signInEmail: "",
   signInPassword: "",
-  signInError: ""
+  signInError: "",
+  signUpNome: "",
+  signUpEmail: "",
+  signUpPassword: "",
+  signUpError: "",
+  success: false
 };
 
 export default function(state = initalState, action) {
@@ -45,7 +51,8 @@ export default function(state = initalState, action) {
     case SET_TOKEN:
       return {
         ...state,
-        token: action.payload
+        token: action.payload,
+        signInError: ""
       };
     case SET_LOGIN:
       return {
@@ -54,6 +61,17 @@ export default function(state = initalState, action) {
         signInPassword: action.senha,
         signInError: action.payload.message,
         token: action.payload.token
+      };
+    case SET_SIGNUP:
+      console.log(action.payload.success + " ItemReducer.js");
+      return {
+        ...state,
+        signUpNome: action.nome,
+        signUpEmail: action.email,
+        signUpPassword: action.senha,
+        signUpError: action.payload.message,
+        token: action.payload._id,
+        success: action.payload.success
       };
 
     default:

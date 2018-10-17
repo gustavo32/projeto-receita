@@ -4,10 +4,12 @@ import {
   ITEMS_LOADING,
   PUT_LIKE,
   SET_TOKEN,
-  SET_LOGIN
+  SET_LOGIN,
+  SET_SIGNUP
 } from "./types";
 import axios from "axios";
 import { setInStorage } from "../utils/storage";
+import history from "../history";
 
 export const getItemsPrimary = () => dispatch => {
   dispatch(setItemsLoading());
@@ -60,6 +62,36 @@ export const setLogin = (email, senha) => dispatch => {
     .then(json => {
       if (json.payload.success) {
         setInStorage("the_main_app", { token: json.payload.token });
+      }
+    });
+};
+
+export const setSignup = (nome, email, senha) => dispatch => {
+  console.log("ItemAction.js 1!");
+  let data1 = JSON.stringify({
+    nome: nome,
+    email: email,
+    senha: senha
+  });
+  axios
+    .post("/api/account/signup", data1, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res =>
+      dispatch({
+        type: SET_SIGNUP,
+        nome: nome,
+        email: email,
+        senha: senha,
+        payload: res.data
+      })
+    )
+    .then(json => {
+      if (json.payload.success) {
+        dispatch(setLogin(json.email, json.senha));
+        history.push("/");
       }
     });
 };
