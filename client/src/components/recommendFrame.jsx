@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { putLike } from "../actions/itemActions";
+import { putLike, openModal } from "../actions/itemActions";
 import PropTypes from "prop-types";
+import Modal from "./modal";
 
 class RecommendFrame extends React.Component {
   render() {
-    const { receita } = this.props.item;
     return (
       <div className="mb-4">
         <div
@@ -24,8 +24,9 @@ class RecommendFrame extends React.Component {
               style={{
                 width: "100%",
                 borderRadius: "4px 4px 0 0",
-                height: "300px"
+                height: "18vw"
               }}
+              onClick={() => this.props.openModal(this.props)}
             />
             <div
               className="display-topright display-hover off"
@@ -60,6 +61,7 @@ class RecommendFrame extends React.Component {
             <span>{this.props.titulo}</span>
           </div>
         </div>
+        <Modal />
       </div>
     );
   }
@@ -69,7 +71,7 @@ class RecommendFrame extends React.Component {
   };
 
   getLikes() {
-    if (this.props.likes > 5) {
+    if (this.props.likes > 0) {
       return (
         <span
           className="badge badge-pill badge-danger"
@@ -142,6 +144,7 @@ class RecommendFrame extends React.Component {
 
 RecommendFrame.propTypes = {
   putLike: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired
 };
 
@@ -151,5 +154,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { putLike }
+  { putLike, openModal }
 )(RecommendFrame);

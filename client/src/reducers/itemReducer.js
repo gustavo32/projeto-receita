@@ -6,7 +6,11 @@ import {
   PUT_LIKE,
   SET_TOKEN,
   SET_LOGIN,
-  SET_SIGNUP
+  SET_SIGNUP,
+  SET_LOGIN_FB,
+  SET_LOGOUT,
+  OPEN_MODAL,
+  HIDE_MODAL
 } from "../actions/types";
 
 const initalState = {
@@ -22,7 +26,13 @@ const initalState = {
   signUpEmail: "",
   signUpPassword: "",
   signUpError: "",
-  success: false
+  isLoggedIn: false,
+  isLoggedInFB: false,
+  success: false,
+  modalIsOpened: false,
+  modalTitulo: "",
+  modalIngredientes: [[]],
+  modalPreparo: [[]]
 };
 
 export default function(state = initalState, action) {
@@ -39,6 +49,11 @@ export default function(state = initalState, action) {
         receitasOther: action.payload,
         loading: false
       };
+    case SET_LOGIN_FB:
+      return {
+        ...state,
+        isLoggedInFB: action.loginState
+      };
     case ITEMS_LOADING:
       return {
         ...state,
@@ -47,6 +62,15 @@ export default function(state = initalState, action) {
     case PUT_LIKE:
       return {
         ...state
+      };
+    case SET_LOGOUT:
+      return {
+        ...state,
+        signInEmail: "",
+        signInPassword: "",
+        signInError: "",
+        isLoggedIn: false,
+        isLoggedInFB: false
       };
     case SET_TOKEN:
       return {
@@ -60,10 +84,11 @@ export default function(state = initalState, action) {
         signInEmail: action.email,
         signInPassword: action.senha,
         signInError: action.payload.message,
-        token: action.payload.token
+        success: action.payload.success,
+        token: action.payload.token,
+        isLoggedIn: action.payload.isLoggedIn
       };
     case SET_SIGNUP:
-      console.log(action.payload.success + " ItemReducer.js");
       return {
         ...state,
         signUpNome: action.nome,
@@ -71,9 +96,22 @@ export default function(state = initalState, action) {
         signUpPassword: action.senha,
         signUpError: action.payload.message,
         token: action.payload._id,
-        success: action.payload.success
+        success: action.payload.success,
+        isLoggedIn: action.payload.isLoggedIn
       };
-
+    case OPEN_MODAL:
+      return {
+        ...state,
+        modalIsOpened: action.modalState,
+        modalTitulo: action.titulo,
+        modalIngredientes: action.ingredientes,
+        modalPreparo: action.preparo
+      };
+    case HIDE_MODAL:
+      return {
+        ...state,
+        modalIsOpened: action.modalState
+      };
     default:
       return state;
   }

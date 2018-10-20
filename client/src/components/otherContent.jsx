@@ -23,7 +23,9 @@ class OtherContent extends React.Component {
                 titulo,
                 image_urls,
                 likes_total,
-                autor
+                autor,
+                ingredientes,
+                modo_de_preparo
               }) => (
                 <div key={_id} className="col-lg-3 col-md-6 col-sm-12">
                   <RecommendFrame
@@ -34,6 +36,8 @@ class OtherContent extends React.Component {
                     img={image_urls}
                     likes={likes_total}
                     autor={autor}
+                    ingredientes={ingredientes}
+                    preparo={modo_de_preparo}
                   />
                 </div>
               )

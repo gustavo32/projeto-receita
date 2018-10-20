@@ -68,15 +68,16 @@ router.post("/signin", (req, res) => {
   const { body } = req;
   const { senha } = body;
   let { email } = body;
-
   if (!email) {
     return res.send({
+      isLoggedIn: false,
       success: false,
       message: "Erro: O campo email não pode ser vazio"
     });
   }
   if (!senha) {
     return res.send({
+      isLoggedIn: false,
       success: false,
       message: "Erro: O campo senha não pode ser vazio"
     });
@@ -87,12 +88,14 @@ router.post("/signin", (req, res) => {
   User.find({ email: email }, (err, users) => {
     if (err) {
       return res.send({
+        isLoggedIn: false,
         success: false,
         message: "Erro no Servidor"
       });
     }
     if (users.length != 1) {
       return res.send({
+        isLoggedIn: false,
         success: false,
         message: "Email inválido"
       });
@@ -101,6 +104,7 @@ router.post("/signin", (req, res) => {
 
     if (!user.validPassword(senha)) {
       return res.send({
+        isLoggedIn: false,
         success: false,
         message: "Senha inválida"
       });
@@ -112,18 +116,47 @@ router.post("/signin", (req, res) => {
     userSession.save((err, doc) => {
       if (err) {
         return res.send({
+          isLoggedIn: false,
           success: false,
           message: "Erro no Servidor"
         });
       }
 
       return res.send({
+        isLoggedIn: true,
         success: true,
         message: "Login efetuado",
         token: doc._id
       });
     });
   });
+});
+
+router.get("/verify_email", (req, res) => {
+  User.find(
+    {
+      email: req.query.email
+    },
+    (err, emails) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: "Erro no servidor"
+        });
+      }
+      if (emails.length != 1) {
+        return res.send({
+          success: false,
+          message: "Nenhum email encontrado"
+        });
+      }
+
+      return res.send({
+        success: true,
+        message: "Email encontrado"
+      });
+    }
+  );
 });
 
 //antes de fazer login, é necessário a verificação
@@ -178,6 +211,7 @@ router.get("/logout", (req, res) => {
       }
 
       return res.send({
+        isLoggedIn: false,
         success: true,
         message: "Sucesso no Logout"
       });

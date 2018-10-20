@@ -4,23 +4,17 @@ import Google from "./google";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { setToken, setLogin } from "../actions/itemActions";
+import {
+  setToken,
+  setLogin,
+  setLogout,
+  setLoginInitial
+} from "../actions/itemActions";
 import PropTypes from "prop-types";
-import { getFromStorage } from "../utils/storage";
 
 class Login extends React.Component {
   componentDidMount() {
-    const obj = getFromStorage("the_main_app");
-    if (obj && obj.token) {
-      const { token } = obj;
-      fetch("/api/account/verify?token=" + token)
-        .then(res => res.json())
-        .then(json => {
-          if (json.success) {
-            this.props.setToken(token);
-          }
-        });
-    }
+    this.props.setLoginInitial();
   }
   render() {
     const { token, signInError } = this.props.item;
@@ -67,7 +61,7 @@ class Login extends React.Component {
       );
     } else if (token) {
       return (
-        <span className="logout" onClick={this.logout}>
+        <span className="logout" onClick={this.props.setLogout}>
           Sair
         </span>
       );
@@ -78,24 +72,13 @@ class Login extends React.Component {
     let senha = document.getElementById("senha").value;
     this.props.setLogin(email, senha);
   };
-  logout = () => {
-    const obj = getFromStorage("the_main_app");
-    if (obj && obj.token) {
-      const { token } = obj;
-      fetch("/api/account/logout?token=" + token)
-        .then(res => res.json())
-        .then(json => {
-          if (json.success) {
-            this.props.setToken(null);
-          }
-        });
-    }
-  };
 }
 
 Login.propTypes = {
   setToken: PropTypes.func.isRequired,
   setLogin: PropTypes.func.isRequired,
+  setLogout: PropTypes.func.isRequired,
+  setLoginInitial: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired
 };
 
@@ -105,5 +88,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setToken, setLogin }
+  { setToken, setLogin, setLogout, setLoginInitial }
 )(Login);

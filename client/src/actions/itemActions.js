@@ -5,10 +5,14 @@ import {
   PUT_LIKE,
   SET_TOKEN,
   SET_LOGIN,
-  SET_SIGNUP
+  SET_SIGNUP,
+  SET_LOGIN_FB,
+  SET_LOGOUT,
+  OPEN_MODAL,
+  HIDE_MODAL
 } from "./types";
 import axios from "axios";
-import { setInStorage } from "../utils/storage";
+import { setInStorage, getFromStorage } from "../utils/storage";
 import history from "../history";
 
 export const getItemsPrimary = () => dispatch => {
@@ -40,6 +44,53 @@ export const putLike = id => dispatch => {
   );
 };
 
+export const setLoginFacebook = (nome, email, senha) => dispatch => {
+  axios.get("/api/account/verify_email?email=" + email).then(res => {
+    if (res.data.success) {
+      dispatch(setLogin(email, senha));
+      if (res.data.success) {
+        dispatch({
+          type: SET_LOGIN_FB,
+          stateLogin: true
+        });
+      }
+    } else {
+      dispatch(setSignup(nome, email, senha));
+    }
+  });
+};
+
+export const setLogout = () => dispatch => {
+  const obj = getFromStorage("the_main_app");
+  if (obj && obj.token) {
+    const { token } = obj;
+    axios.get("/api/account/logout?token=" + token).then(res => {
+      if (res.data.success) {
+        setInStorage("the_main_app", { token: null });
+        dispatch(setToken(null));
+        dispatch({
+          type: SET_LOGOUT,
+          payload: res.data
+        });
+        if (res.data.isLoggedInFB) window.FB.logout();
+      }
+    });
+  }
+};
+
+export const setLoginInitial = () => dispatch => {
+  const obj = getFromStorage("the_main_app");
+  if (obj && obj.token) {
+    console.log(obj.token);
+    const { token } = obj;
+    axios.get("/api/account/verify?token=" + token).then(res => {
+      if (res.data.success) {
+        dispatch(setToken(token));
+      }
+    });
+  }
+};
+
 export const setLogin = (email, senha) => dispatch => {
   let data = JSON.stringify({
     email: email,
@@ -67,7 +118,6 @@ export const setLogin = (email, senha) => dispatch => {
 };
 
 export const setSignup = (nome, email, senha) => dispatch => {
-  console.log("ItemAction.js 1!");
   let data1 = JSON.stringify({
     nome: nome,
     email: email,
@@ -106,5 +156,22 @@ export const setToken = token => {
 export const setItemsLoading = () => {
   return {
     type: ITEMS_LOADING
+  };
+};
+
+export const openModal = props => {
+  return {
+    type: OPEN_MODAL,
+    modalState: true,
+    titulo: props.titulo,
+    ingredientes: props.ingredientes,
+    preparo: props.preparo
+  };
+};
+
+export const hideModal = () => {
+  return {
+    type: HIDE_MODAL,
+    modalState: false
   };
 };

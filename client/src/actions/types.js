@@ -5,3 +5,7 @@ export const PUT_LIKE = "PUT_LIKE";
 export const SET_TOKEN = "SET_TOKEN";
 export const SET_LOGIN = "SET_LOGIN";
 export const SET_SIGNUP = "SET_SIGNUP";
+export const SET_LOGIN_FB = "SET_LOGIN_FB";
+export const SET_LOGOUT = "SET_LOGOUT";
+export const OPEN_MODAL = "OPEN_MODAL";
+export const HIDE_MODAL = "HIDE_MODAL";

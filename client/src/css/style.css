@@ -214,21 +214,28 @@ form {
   margin-left: 20%;
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 990px) {
   .hide-mobile {
     display: none;
   }
+
+  .display-container img {
+    height: 30vw !important;
+  }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 760px) {
   .partial-hide-mobile {
     width: 60%;
   }
-
+  .display-container img {
+    height: 50vw !important;
+  }
+  .social-link li a {
+  }
   form {
     margin: 0;
   }
-
   nav div,
   nav form,
   nav a,
@@ -435,7 +442,7 @@ div .text-center {
   color: #ccc;
   width: 40px;
   height: 40px;
-  line-height: 45px;
+  line-height: 40px;
   text-align: center;
   display: inline-block;
   font-size: 18px;
@@ -611,4 +618,67 @@ span.logout:hover {
   background-color: #ff8c00;
   border-radius: 3px 3px 0 0;
   text-align: center;
+}
+
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  animation: opacity 0.1s;
+  opacity: 0.3;
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+/* Modal Content (image) */
+.modal-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 80%;
+  max-width: 800px;
+}
+
+/* The Close Button */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  .modal-content {
+    width: 100%;
+  }
 }

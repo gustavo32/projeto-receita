@@ -47,25 +47,17 @@ class Cadastrar extends React.Component {
     );
   }
   signUp = () => {
-    //#todo apesar de estar cadastrando e a mensagem ser 'cadastro efetuado' no itemReducer.js, nesta funcao a mensagem nao apresenta nada... o problema esta que no itemreducer nao esta fazendo o set
-    let { success, signUpEmail } = this.props.item;
-
     let nome = document.getElementById("nomeCadastro").value;
     let email = document.getElementById("emailCadastro").value;
     let senha = document.getElementById("senhaCadastro").value;
     let senha2 = document.getElementById("confirmarSenha").value;
     if (senha.length < 6) {
-      console.log("senha menor que 6 digitos");
+      alert("A senha precisa ter mais que 6 digitos!");
     } else if (senha === senha2) {
       this.props.setSignup(nome, email, senha);
-      // console.log(this.props.success + " " + this.props.message);
-      // if (success) {
-      //   return <Redirect to="/" />;
-      // }
     } else {
-      console.log("As senhas não são iguais!");
+      alert("As senhas não são iguais!");
     }
-    console.log("depois");
   };
 }
 

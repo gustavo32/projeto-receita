@@ -14,7 +14,7 @@ const ReceitaSchema = new Schema({
   likes_total: Number,
   image_urls: [String],
   ingredientes: [[]],
-  ingredientes: [[]],
+  modo_de_preparo: [[]],
   autor: String,
   tempo_de_preparo: String,
   porcoes: Number
