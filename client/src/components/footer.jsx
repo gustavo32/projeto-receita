@@ -7,7 +7,7 @@ class Footer extends React.Component {
       <div className="footer-bottom">
         <div className="container">
           <div className="row">
-            <div className="col-sm-6">
+            <div className="col-6">
               <div className="copyright-text">
                 <p>
                   © 2018 CopyRight:{" "}
@@ -17,7 +17,7 @@ class Footer extends React.Component {
                 </p>
               </div>
             </div>
-            <div className="col-sm-6">
+            <div className="col-6">
               <ul className="social-link pull-right">
                 <li>
                   <a href="">

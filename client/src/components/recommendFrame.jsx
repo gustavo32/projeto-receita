@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { putLike, openModal } from "../actions/itemActions";
 import PropTypes from "prop-types";
-import Modal from "./modal";
 
 class RecommendFrame extends React.Component {
   render() {
@@ -24,7 +23,10 @@ class RecommendFrame extends React.Component {
               style={{
                 width: "100%",
                 borderRadius: "4px 4px 0 0",
-                height: "18vw"
+                height: "18vw",
+                overflow: "hidden",
+                objectFit: "cover",
+                cursor: "pointer"
               }}
               onClick={() => this.props.openModal(this.props)}
             />
@@ -45,30 +47,51 @@ class RecommendFrame extends React.Component {
             <div className="display-topright display-hover off">
               <button
                 type="button"
-                className="animate-opacity btn margin text-white-hover-red"
+                className={this.classLike()}
                 title="Amei"
-                onClick={() => this.addLike(this.props.id)}
+                onClick={() => this.addLike()}
               >
                 {this.getLikes()}
-                <i className="fa fa-heart" />
+                <i
+                  className="fa fa-heart"
+                  style={{ WebkitTextStroke: " 1px #f44336" }}
+                />
               </button>
             </div>
             <div className="display-bottomleft display-hover text-white off">
-              <div className="padding animate-opacity">{this.props.autor}</div>
+              <div
+                className="padding animate-opacity"
+                style={{
+                  textTransform: "capitalize",
+                  WebkitTextStroke: "0.1px black"
+                }}
+              >
+                {this.props.autor}
+              </div>
             </div>
           </div>
           <div className="text-title">
             <span>{this.props.titulo}</span>
           </div>
         </div>
-        <Modal />
       </div>
     );
   }
-
-  addLike = id => {
-    this.props.putLike(id);
+  addLike = () => {
+    if (this.props.item.isLoggedIn) {
+      this.props.putLike(this.props);
+    } else {
+      alert("Faça Login para curtir!");
+    }
   };
+  classLike() {
+    let classe = "animate-opacity btn margin ";
+    if (this.props.item.isLoggedIn) {
+      return classe + "text-red";
+    } else {
+      return classe + "text-white-hover-red";
+    }
+  }
 
   getLikes() {
     if (this.props.likes > 0) {

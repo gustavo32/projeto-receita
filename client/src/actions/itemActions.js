@@ -1,6 +1,5 @@
 import {
-  GET_ITEMS_PRIMARY,
-  GET_ITEMS_OTHER,
+  GET_RECEITAS,
   ITEMS_LOADING,
   PUT_LIKE,
   SET_TOKEN,
@@ -19,8 +18,9 @@ export const getItemsPrimary = () => dispatch => {
   dispatch(setItemsLoading());
   axios.get("/api/receitas/primaryContent").then(res =>
     dispatch({
-      type: GET_ITEMS_PRIMARY,
-      payload: res.data
+      type: GET_RECEITAS,
+      payload: res.data,
+      tipo: "primary"
     })
   );
 };
@@ -29,19 +29,21 @@ export const getItemsOther = () => dispatch => {
   dispatch(setItemsLoading());
   axios.get("/api/receitas/otherContent").then(res =>
     dispatch({
-      type: GET_ITEMS_OTHER,
-      payload: res.data
+      type: GET_RECEITAS,
+      payload: res.data,
+      tipo: "other"
     })
   );
 };
 
-export const putLike = id => dispatch => {
-  axios.put(`/api/receitas/${id}`).then(res =>
+export const putLike = props => dispatch => {
+  axios.put("/api/receitas/putLike?id=" + props.id).then(res => {
     dispatch({
       type: PUT_LIKE,
-      payload: res.id
-    })
-  );
+      id: props.id,
+      likes: res.data.likes
+    });
+  });
 };
 
 export const setLoginFacebook = (nome, email, senha) => dispatch => {
@@ -81,7 +83,6 @@ export const setLogout = () => dispatch => {
 export const setLoginInitial = () => dispatch => {
   const obj = getFromStorage("the_main_app");
   if (obj && obj.token) {
-    console.log(obj.token);
     const { token } = obj;
     axios.get("/api/account/verify?token=" + token).then(res => {
       if (res.data.success) {
@@ -165,7 +166,9 @@ export const openModal = props => {
     modalState: true,
     titulo: props.titulo,
     ingredientes: props.ingredientes,
-    preparo: props.preparo
+    preparo: props.preparo,
+    urlImg: props.img,
+    autor: props.autor
   };
 };
 

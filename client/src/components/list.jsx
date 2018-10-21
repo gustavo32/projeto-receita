@@ -1,6 +1,12 @@
 import React from "react";
 
 class List extends React.Component {
+  componentDidMount() {
+    document.addEventListener("keyup", e => {
+      if (document.getElementById("myInput").focus && e.keyCode === 13)
+        this.newElement();
+    });
+  }
   render() {
     return (
       <div className="mt-4">
@@ -19,35 +25,44 @@ class List extends React.Component {
       </div>
     );
   }
-
-  newElement = () => {
-    let li = document.createElement("li");
+  newElement() {
     let inputValue = document.getElementById("myInput").value;
-    let t = document.createTextNode(inputValue);
-    li.appendChild(t);
-    if (inputValue === "") {
-      alert("Você deve escrever algo!");
+    if (inputValue !== "") {
+      console.log(document.getElementById("myUL"));
+      let array = inputValue.split(",");
+      let t;
+      for (let i = 0; i < array.length; i++) {
+        array[i] = array[i].trimLeft();
+        array[i] = array[i].trimRight();
+        array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1);
+        t = document.createTextNode(array[i]);
+        let li = document.createElement("li");
+        li.appendChild(t);
+
+        document.getElementById("myUL").appendChild(li);
+
+        document.getElementById("myInput").value = "";
+        document.getElementById("myInput").focus();
+
+        let span = document.createElement("SPAN");
+        let txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        let close = document.getElementsByClassName("close");
+
+        for (let i = 0; i < close.length; i++) {
+          close[i].onclick = function() {
+            let div = this.parentElement;
+            div.style.display = "none";
+          };
+        }
+      }
     } else {
-      document.getElementById("myUL").appendChild(li);
+      alert("Você deve digitar algo!");
     }
-    document.getElementById("myInput").value = "";
-    document.getElementById("myInput").focus();
-
-    let span = document.createElement("SPAN");
-    let txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    li.appendChild(span);
-
-    let close = document.getElementsByClassName("close");
-
-    for (let i = 0; i < close.length; i++) {
-      close[i].onclick = function() {
-        let div = this.parentElement;
-        div.style.display = "none";
-      };
-    }
-  };
+  }
 }
 
 export default List;

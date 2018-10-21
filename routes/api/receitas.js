@@ -16,13 +16,26 @@ router.get("/otherContent", (req, res) => {
     .then(receitas => res.json(receitas));
 });
 
-router.put("/:id", (req, res) => {
+router.put("/putLike", (req, res) => {
   Receita.updateOne(
-    { _id: req.params.id },
+    { _id: req.query.id },
     { $inc: { likes_total: 1 } },
     {},
     (err, numberAffected) => {
-      res.send("sucesso");
+      if (!err) {
+        Receita.find({ _id: req.query.id }, (err, field) => {
+          if (!err) {
+            return res.send({
+              success: true,
+              likes: field[0].likes_total
+            });
+          } else {
+            return res.send({
+              success: false
+            });
+          }
+        });
+      }
     }
   );
 });

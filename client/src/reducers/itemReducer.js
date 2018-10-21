@@ -1,7 +1,6 @@
 //reducers stays here
 import {
-  GET_ITEMS_PRIMARY,
-  GET_ITEMS_OTHER,
+  GET_RECEITAS,
   ITEMS_LOADING,
   PUT_LIKE,
   SET_TOKEN,
@@ -14,9 +13,7 @@ import {
 } from "../actions/types";
 
 const initalState = {
-  receitasPrimary: [],
-  receitasOther: [],
-  receita: [],
+  receitas: [],
   loading: false,
   token: "",
   signInEmail: "",
@@ -32,21 +29,20 @@ const initalState = {
   modalIsOpened: false,
   modalTitulo: "",
   modalIngredientes: [[]],
-  modalPreparo: [[]]
+  modalPreparo: [[]],
+  modalImg: "",
+  modalAutor: ""
 };
 
 export default function(state = initalState, action) {
   switch (action.type) {
-    case GET_ITEMS_PRIMARY:
+    case GET_RECEITAS:
       return {
         ...state,
-        receitasPrimary: action.payload,
-        loading: false
-      };
-    case GET_ITEMS_OTHER:
-      return {
-        ...state,
-        receitasOther: action.payload,
+        receitas: [
+          ...state.receitas,
+          { receita: action.payload, tipo: action.tipo }
+        ],
         loading: false
       };
     case SET_LOGIN_FB:
@@ -105,7 +101,9 @@ export default function(state = initalState, action) {
         modalIsOpened: action.modalState,
         modalTitulo: action.titulo,
         modalIngredientes: action.ingredientes,
-        modalPreparo: action.preparo
+        modalPreparo: action.preparo,
+        modalImg: action.urlImg,
+        modalAutor: action.autor
       };
     case HIDE_MODAL:
       return {

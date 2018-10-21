@@ -32,7 +32,7 @@ h2 {
   text-align: center;
 }
 
-.row .hr-effect {
+.hr-effect {
   height: 2px;
   width: 80%;
   margin: 0 10% 0 10%;
@@ -229,9 +229,7 @@ form {
     width: 60%;
   }
   .display-container img {
-    height: 50vw !important;
-  }
-  .social-link li a {
+    height: 55vw !important;
   }
   form {
     margin: 0;
@@ -267,6 +265,12 @@ a:visited {
   vertical-align: middle;
 }
 
+.vr-modal {
+  color: black;
+  border-left: 2px solid rgba(0, 0, 0, 0.2);
+  margin-left: 2.2rem;
+}
+
 hr {
   width: 80%;
   margin: 0 10% 0 10%;
@@ -281,6 +285,35 @@ hr {
   text-align: center;
   font-weight: 200;
   color: #ff8c00;
+}
+
+.modal-title {
+  font-size: 3.5vh;
+  text-align: center;
+  font-weight: 100;
+  color: white;
+  text-transform: uppercase;
+  background-color: #ff8c00;
+  padding-top: 2px;
+  font-style: normal;
+  overflow-x: hidden;
+  padding: 0 1.5rem 0 1.5rem;
+}
+
+.text-ingredientes {
+  font-size: 18px;
+  margin: 0 2rem 0.5rem 2rem;
+  font-weight: 200;
+  list-style-type: disc;
+  text-align: justify;
+}
+
+.text-preparo {
+  font-size: 18px;
+  margin: 0 2rem 1rem 2rem;
+  font-weight: 200;
+  list-style-type: decimal;
+  text-align: justify;
 }
 
 .display-topleft {
@@ -475,6 +508,7 @@ div .text-center {
   margin: 0px 0px 0px 10px;
   padding: 0;
   line-height: 50px;
+  white-space: normal;
 }
 
 .dropdown-content input {
@@ -631,9 +665,9 @@ span.logout:hover {
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  animation: opacity 0.1s;
-  opacity: 0.3;
+  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+  -webkit-animation: opacity 0.1s;
+  animation: opacity 0.2s;
 }
 
 @keyframes opacity {
@@ -641,7 +675,16 @@ span.logout:hover {
     opacity: 0;
   }
   to {
-    opacity: 0.3;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

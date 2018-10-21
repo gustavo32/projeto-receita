@@ -7,9 +7,12 @@ class NavBar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg gradient-y-r">
-        <div className="container-fluid">
+        <div
+          className="container-fluid"
+          style={{ display: "flex", whiteSpace: "nowrap" }}
+        >
           <img className="logo" src={logo} href="#" alt="logo" />
-          <form action="/" style={{ marginLeft: "120px" }}>
+          <form action="/" style={{ marginLeft: "80px" }}>
             <input
               type="search"
               className="hide-mobile"

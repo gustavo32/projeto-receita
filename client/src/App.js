@@ -4,6 +4,7 @@ import PrimaryContent from "./components/primaryContent";
 import List from "./components/list.jsx";
 import OtherContent from "./components/otherContent";
 import Footer from "./components/footer";
+import Modal from "./components/modal";
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
           </div>
         </div>
         <Footer />
+        <Modal />
       </div>
     );
   }
