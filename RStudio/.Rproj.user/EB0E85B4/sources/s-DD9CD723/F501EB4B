@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540088964008.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F501EB4B",
+    "lastKnownWriteTime" : 117357400,
+    "last_content_update" : 1540088964008,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "616AD9E2",
+        "caption" : "receitas",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=receitas&cache_key=616AD9E2",
+        "displayedObservations" : 956110,
+        "environment" : "",
+        "object" : "receitas",
+        "preview" : 0,
+        "totalObservations" : 956110,
+        "variables" : 1
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

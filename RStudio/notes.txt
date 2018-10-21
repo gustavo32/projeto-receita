@@ -1,0 +1,29 @@
+#corpus <- Corpus(VectorSource(receitas$ingredientes))
+
+#limpeza <- tm_map(corpus, content_transformer(tolower))
+#limpeza <- tm_map(limpeza, content_transformer(removeNumbers))
+#limpeza <- tm_map(limpeza, content_transformer(removePunctuation), preserve_intra_word_dashes = TRUE)
+##limpeza <- tm_map(limpeza, content_transformer(stripWhitespace))
+#limpeza <- tm_map(limpeza, content_transformer(removeWords), stopwords("portuguese"))
+#limpeza <- tm_map(limpeza, content_transformer(removeWords), c( 
+#"sopa", "picada", "picado", "picados", "picadas", "unidade", "unidades", "dente", "dentes", "esmagados", 
+#"esmagadas","esmagado", "esmagada", "gosto", "kg","kilogramas", "preferência","preferencia", "gr","grama",
+#"gramas", "chá", "cha", "rodelas", "socados", "socadas", "magro", "magra", "ralado", "ralada", "raladas", 
+#"ralados", "lata", "latas", "ml", "gema","gemas", "fresco", "fresca", "frescos", "frescas", "xícara", 
+#"xícaras", "xicara", "xicaras", "suco", "sucos", "pau","paus", "mistura", "misturas","litro","litros", 
+#"colheres","colher", "folhas","folha","moídas", "moídos", "moída", "moido", "moidas", "moidos", "moida", 
+#"moido", "desidratado", "desidratada", "copo", "copos", "média", "médias", "médio", "médios","media", 
+#"medias", "medio", "medios", "maduro", "madura", "maduros", "maduras", "grande", "grandes", "pequeno", 
+#"pequena", "pequenos", "pequenas", "grão", "grãos", "grao", "graos", "picadinho", "picadinha", "picadinhos", 
+#"picadinhas", "amassado", "amassada", "amassadas", "amassados", "tablete", "tabletes", "dissolvido", 
+#"dissolvidos", "dissolvida", "dissolvidas", "diluído", "diluída", "diluídos", "diluídas", "diluido", 
+#"diluida", "diluidos", "diluidas", "desnatado", "desnatada", "desnatados", "desnatadas", "sobremesa", 
+#"sobremesas", "espremido", "espremida", "espremidos", "espremidas", "esprimido", "esprimida", "esprimidos", 
+#"esprimidas", "cabeça", "cabeças", "pele", "peles", "cubo", "cubos", "cubinho", "cubinhos", "pitada", "pitadas",
+#"aproximadamente", "poupa", "poupas", "seco", "seca", "secos", "secas", "molhado", "molhada", "molhados", 
+#"molhadas", "refogado", "refogados", "refogar", "caixa", "marinho", "marinhos", "gelado", "gelada", "gelados",
+#"geladas", "integral", "integrais", "fervente", "ferventes", "envelope", "finamente", "raso", "rasa", "rasos",
+#"rasas", "tempero", "temperos", "pó", "pós", "po", "pos", "maço", "maços", "cozido", "cozida", "cozidos",
+#"cozidas", "passarinho", "passarinhos", "fatiado", "fatiados", "pedaço", "pedaços", "bem")
+#)
+

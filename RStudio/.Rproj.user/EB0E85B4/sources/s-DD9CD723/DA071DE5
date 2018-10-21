@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540076042683.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DA071DE5",
+    "lastKnownWriteTime" : 1540094020,
+    "last_content_update" : 1540094020911,
+    "path" : "~/Documentos/Semestre_6/Oficina/RStudio/Limpeza2.0.R",
+    "project_path" : "Limpeza2.0.R",
+    "properties" : {
+        "cursorPosition" : "20,73",
+        "scrollLine" : "10"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
