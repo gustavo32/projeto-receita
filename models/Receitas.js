@@ -17,7 +17,8 @@ const ReceitaSchema = new Schema({
   ingredientes: [[]],
   autor: String,
   tempo_de_preparo: String,
-  porcoes: Number
+  porcoes: Number,
+  ingredientes_limpos: Array
 });
 
 module.exports = Receita = mongoose.model("receitas", ReceitaSchema);

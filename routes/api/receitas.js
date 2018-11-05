@@ -18,14 +18,14 @@ router.get("/primaryContent", (req, res) => {
       $eq: [
         {
           $size: {
-            $setDifference: ["$ingredientes.sub_lista", listaIngredientes]
+            $setDifference: ["$ingredientes_limpos", listaIngredientes]
           }
         },
-        3
+        0
       ]
     }
   })
-    // .limit(4)
+    .limit(4)
     .then(receitas => res.json(receitas));
 });
 /////////////////////////////////////////////////["1 colher (sopa) de farinha de trigo","1 colher (sopa) de manteiga","1 unidade de cebola picada(s)","1 dente de alho esmagado(s)","leite a gosto","sal a gosto","pimenta-do-reino branca a gosto","noz-moscada a gosto"]
@@ -43,7 +43,7 @@ router.get("/test", (req, res) => {
             titulo: 1,
             Tamanho: {
               $size: {
-                $setDifference: ["$ingredientes.sub_lista", listaIngredientes]
+                $setDifference: ["$ingredientes_limpos", listaIngredientes]
               }
             }
           }
@@ -72,42 +72,14 @@ router.put("/:id", (req, res) => {
   );
 });
 var listaIngredientes = [
-  "farinha de trigo",
+  "farinha trigo",
   "manteiga",
   "cebola",
   "alho",
   "leite",
   "sal",
-  "pimenta-do-reino",
-  "noz-moscada",
-  "ovo",
-  "500 ml de creme de leite fresco ou 400 gr de Nata",
-  "1 unidade de cebola picada(s)",
-  "1 folha de louro",
-  "alecrim a gosto",
-  "cebolinha verde a gosto",
-  "pimenta-do-reino branca a gosto",
-  "alho picado(s) a gosto",
-  "salsinha picada(s) a gosto",
-  "1 colher (sopa) de amido de milho",
-  "sal a gosto",
-  "500 gr de camarão sete barbas",
-  "1 colher (sopa) de farinha de trigo",
-  "1 colher (sopa) de manteiga",
-  "1 dose de conhaque",
-  "500 ml de água",
-  "salsão a gosto",
-  "pimenta-do-reino branca a gosto",
-  "louro a gosto",
-  "1 unidade de alho picado(s)",
-  "salsinha picada(s) a gosto",
-  "4 postas de salmão",
-  "aspargo a gosto",
-  "lagostim a gosto",
-  "manteiga a gosto",
-  "geral",
-  "Molho",
-  "Montagem"
+  "pimenta reino branca",
+  "noz moscada"
 ];
 
 module.exports = router;
