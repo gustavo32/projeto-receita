@@ -71,15 +71,6 @@ router.put("/:id", (req, res) => {
     }
   );
 });
-var listaIngredientes = [
-  "farinha trigo",
-  "manteiga",
-  "cebola",
-  "alho",
-  "leite",
-  "sal",
-  "pimenta reino branca",
-  "noz moscada"
-];
+var listaIngredientes = ["alecrim", "alho", "azeite"];
 
 module.exports = router;
