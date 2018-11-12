@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import { hideModal } from "../actions/itemActions";
 import PropTypes from "prop-types";
 import uuid from "uuid";
+import arrow from "./../css/arrow-left.png";
 
 class Modal extends React.Component {
   componentDidMount() {
     document.addEventListener("keyup", e => {
-      if (this.props.item.modalIsOpened && e.keyCode === 27) this.close();
+      if (this.props.item && this.props.item.modalIsOpened && e.keyCode === 27)
+        this.close();
     });
   }
   render() {
@@ -16,18 +18,13 @@ class Modal extends React.Component {
       return (
         <div id="modal" className="modal">
           <span className="modal-close" onClick={this.close}>
-            &times;
+            {this.icon()}
           </span>
           <div className="modal-content">
             <img
               src={this.props.item.modalImg}
               alt="receita"
-              style={{
-                width: "100%",
-                height: "40vh",
-                overflow: "hidden",
-                objectFit: "cover"
-              }}
+              className="modal-image"
             />
             <div className="modal-title">{this.props.item.modalTitulo}</div>
             <div
@@ -96,6 +93,21 @@ class Modal extends React.Component {
       return null;
     }
   }
+
+  icon() {
+    if (window.screen.width <= 760) {
+      return (
+        <img
+          src={arrow}
+          style={{ margin: 0, padding: 0, transform: "scale(0.7, 0.7)" }}
+          alt="Voltar"
+        />
+      );
+    } else {
+      return <span>&times;</span>;
+    }
+  }
+
   close = () => {
     let modal = document.getElementById("modal");
     modal.style.display = "none";

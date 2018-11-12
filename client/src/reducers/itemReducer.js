@@ -9,12 +9,16 @@ import {
   SET_LOGIN_FB,
   SET_LOGOUT,
   OPEN_MODAL,
-  HIDE_MODAL
+  HIDE_MODAL,
+  LOGGED_IN,
+  SET_INGREDIENTES_USER,
+  GET_INGREDIENTES_USER
 } from "../actions/types";
 
 const initalState = {
   receitas: [],
   loading: false,
+  ingredientesUser: [],
   token: "",
   signInEmail: "",
   signInPassword: "",
@@ -36,6 +40,17 @@ const initalState = {
 
 export default function(state = initalState, action) {
   switch (action.type) {
+    case SET_INGREDIENTES_USER:
+      return {
+        ...state
+      };
+
+    case GET_INGREDIENTES_USER:
+      return {
+        ...state,
+        ingredientesUser: action.ingredientes
+      };
+
     case GET_RECEITAS:
       return {
         ...state,
@@ -49,6 +64,11 @@ export default function(state = initalState, action) {
       return {
         ...state,
         isLoggedInFB: action.loginState
+      };
+    case LOGGED_IN:
+      return {
+        ...state,
+        isLoggedIn: action.loginState
       };
     case ITEMS_LOADING:
       return {

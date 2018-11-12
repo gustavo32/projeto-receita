@@ -8,3 +8,6 @@ export const SET_LOGIN_FB = "SET_LOGIN_FB";
 export const SET_LOGOUT = "SET_LOGOUT";
 export const OPEN_MODAL = "OPEN_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
+export const LOGGED_IN = "LOGGED_IN";
+export const SET_INGREDIENTES_USER = "SET_INGREDIENTES_USER";
+export const GET_INGREDIENTES_USER = "GET_INGREDIENTES_USER";

@@ -16,7 +16,6 @@ class PrimaryContent extends React.Component {
       <div>
         <div style={{ margin: "0 5% 0 5%" }}>
           <div className="row mt-4">
-            {console.log(receitas)}
             {receitas.map(item => {
               if (item.tipo === "primary") {
                 return item.receita.map(

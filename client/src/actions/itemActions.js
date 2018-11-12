@@ -8,7 +8,10 @@ import {
   SET_LOGIN_FB,
   SET_LOGOUT,
   OPEN_MODAL,
-  HIDE_MODAL
+  HIDE_MODAL,
+  LOGGED_IN,
+  SET_INGREDIENTES_USER,
+  GET_INGREDIENTES_USER
 } from "./types";
 import axios from "axios";
 import { setInStorage, getFromStorage } from "../utils/storage";
@@ -36,14 +39,73 @@ export const getItemsOther = () => dispatch => {
   );
 };
 
-export const putLike = props => dispatch => {
-  axios.put("/api/receitas/putLike?id=" + props.id).then(res => {
+export const handleClick2 = e => {
+  let div = e.target;
+  div.parentNode.remove(div);
+  let m = document.getElementById("myUL");
+  let ingred = [];
+  for (let i = 0; i < m.childNodes.length; i++) {
+    ingred.push(m.childNodes[i].textContent.slice(0, -1));
+  }
+  this.setState(
+    {
+      ingredientes: ingred
+    },
+    res => {
+      this.updateDB();
+    }
+  );
+};
+
+export const getIngredientesUser = token => dispatch => {
+  axios.get(`/api/receitas/ingredientes_user/${token}`).then(res => {
+    if (res.data.success) {
+      dispatch({
+        type: GET_INGREDIENTES_USER,
+        ingredientes: res.data.ingredientes
+      });
+      let ingredientes = res.data.ingredientes;
+      let t;
+      for (let i = 0; i < ingredientes.length; i++) {
+        t = document.createTextNode(ingredientes[i]);
+        let li = document.createElement("li");
+        li.appendChild(t);
+
+        document.getElementById("myUL").appendChild(li);
+
+        document.getElementById("myInput").value = "";
+        document.getElementById("myInput").focus();
+
+        let span = document.createElement("SPAN");
+        let txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+      }
+    }
+  });
+};
+
+export const putLike = (props, userToken) => dispatch => {
+  axios.put(`/api/receitas/putLike/${props.id}/${userToken}`).then(res => {
     dispatch({
       type: PUT_LIKE,
       id: props.id,
       likes: res.data.likes
     });
   });
+};
+
+export const setIngredientesUser = (ingredientes, token) => dispatch => {
+  axios
+    .post(`/api/receitas/salvar_ingredientes/${token}/${ingredientes}`)
+    .then(res => {
+      if (res.data.success) {
+        dispatch({
+          type: SET_INGREDIENTES_USER
+        });
+      }
+    });
 };
 
 export const setLoginFacebook = (nome, email, senha) => dispatch => {
@@ -87,6 +149,11 @@ export const setLoginInitial = () => dispatch => {
     axios.get("/api/account/verify?token=" + token).then(res => {
       if (res.data.success) {
         dispatch(setToken(token));
+        dispatch({
+          type: LOGGED_IN,
+          loginState: true
+        });
+        dispatch(getIngredientesUser(token));
       }
     });
   }
@@ -114,6 +181,7 @@ export const setLogin = (email, senha) => dispatch => {
     .then(json => {
       if (json.payload.success) {
         setInStorage("the_main_app", { token: json.payload.token });
+        dispatch(getIngredientesUser(json.payload.token));
       }
     });
 };
@@ -147,11 +215,11 @@ export const setSignup = (nome, email, senha) => dispatch => {
     });
 };
 
-export const setToken = token => {
-  return {
+export const setToken = token => dispatch => {
+  dispatch({
     type: SET_TOKEN,
     payload: token
-  };
+  });
 };
 
 export const setItemsLoading = () => {

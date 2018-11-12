@@ -71,6 +71,7 @@ router.post("/signin", (req, res) => {
   if (!email) {
     return res.send({
       isLoggedIn: false,
+      ingredientes: [],
       success: false,
       message: "Erro: O campo email não pode ser vazio"
     });
@@ -78,6 +79,7 @@ router.post("/signin", (req, res) => {
   if (!senha) {
     return res.send({
       isLoggedIn: false,
+      ingredientes: [],
       success: false,
       message: "Erro: O campo senha não pode ser vazio"
     });
@@ -89,6 +91,7 @@ router.post("/signin", (req, res) => {
     if (err) {
       return res.send({
         isLoggedIn: false,
+        ingredientes: [],
         success: false,
         message: "Erro no Servidor"
       });
@@ -96,6 +99,7 @@ router.post("/signin", (req, res) => {
     if (users.length != 1) {
       return res.send({
         isLoggedIn: false,
+        ingredientes: [],
         success: false,
         message: "Email inválido"
       });
@@ -105,6 +109,7 @@ router.post("/signin", (req, res) => {
     if (!user.validPassword(senha)) {
       return res.send({
         isLoggedIn: false,
+        ingredientes: [],
         success: false,
         message: "Senha inválida"
       });
@@ -117,6 +122,7 @@ router.post("/signin", (req, res) => {
       if (err) {
         return res.send({
           isLoggedIn: false,
+          ingredientes: [],
           success: false,
           message: "Erro no Servidor"
         });
@@ -124,6 +130,7 @@ router.post("/signin", (req, res) => {
 
       return res.send({
         isLoggedIn: true,
+        ingredientes: doc.ingredientes,
         success: true,
         message: "Login efetuado",
         token: doc._id

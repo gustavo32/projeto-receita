@@ -42,8 +42,10 @@ class RecommendFrame extends React.Component {
                 <i className="fa fa-share-alt text-blue" />
               </button>
             </div>
-            {this.tempo()}
-            {this.displayText()}
+            <div className="hide-mobile">
+              {this.tempo()}
+              {this.displayText()}
+            </div>
             <div className="display-topright display-hover off">
               <button
                 type="button"
@@ -79,7 +81,7 @@ class RecommendFrame extends React.Component {
   }
   addLike = () => {
     if (this.props.item.isLoggedIn) {
-      this.props.putLike(this.props);
+      this.props.putLike(this.props, this.props.item.token);
     } else {
       alert("Faça Login para curtir!");
     }

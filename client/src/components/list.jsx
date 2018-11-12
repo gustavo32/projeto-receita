@@ -1,12 +1,33 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import {
+  setIngredientesUser,
+  getIngredientesUser
+} from "../actions/itemActions";
 
 class List extends React.Component {
   componentDidMount() {
-    document.addEventListener("keyup", e => {
-      if (document.getElementById("myInput").focus && e.keyCode === 13)
-        this.newElement();
+    let inputValue = document.getElementById("myInput");
+    inputValue.addEventListener("keyup", e => {
+      if (inputValue && inputValue.focus && e.keyCode === 13) this.newElement();
     });
   }
+
+  componentDidUpdate(prevState, nowState) {
+    if (prevState !== nowState) {
+      let close = document.getElementsByClassName("close");
+
+      for (let i = 0; i < close.length; i++) {
+        close[i].onclick = this.handleClick;
+      }
+    }
+  }
+
+  state = {
+    ingredientes: []
+  };
+
   render() {
     return (
       <div className="mt-4">
@@ -25,10 +46,37 @@ class List extends React.Component {
       </div>
     );
   }
-  newElement() {
+
+  updateDB = () => {
+    if (this.props.item.isLoggedIn) {
+      let ingred = this.state.ingredientes;
+      if (this.props.item.isLoggedIn) {
+        this.props.setIngredientesUser(ingred, this.props.item.token);
+      }
+    }
+  };
+
+  handleClick = e => {
+    let div = e.target;
+    div.parentNode.remove(div);
+    let m = document.getElementById("myUL");
+    let ingred = [];
+    for (let i = 0; i < m.childNodes.length; i++) {
+      ingred.push(m.childNodes[i].textContent.slice(0, -1));
+    }
+    this.setState(
+      {
+        ingredientes: ingred
+      },
+      res => {
+        this.updateDB();
+      }
+    );
+  };
+
+  newElement = () => {
     let inputValue = document.getElementById("myInput").value;
     if (inputValue !== "") {
-      console.log(document.getElementById("myUL"));
       let array = inputValue.split(",");
       let t;
       for (let i = 0; i < array.length; i++) {
@@ -53,16 +101,39 @@ class List extends React.Component {
         let close = document.getElementsByClassName("close");
 
         for (let i = 0; i < close.length; i++) {
-          close[i].onclick = function() {
-            let div = this.parentElement;
-            div.style.display = "none";
-          };
+          close[i].onclick = this.handleClick;
         }
+
+        let m = document.getElementById("myUL");
+        let ingred = [];
+        for (let i = 0; i < m.childNodes.length; i++) {
+          ingred.push(m.childNodes[i].textContent.slice(0, -1));
+        }
+        this.setState(
+          {
+            ingredientes: ingred
+          },
+          res => {
+            this.updateDB();
+          }
+        );
       }
     } else {
       alert("Você deve digitar algo!");
     }
-  }
+  };
 }
 
-export default List;
+List.propTypes = {
+  item: PropTypes.object.isRequired,
+  setIngredientesUser: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  item: state.item
+});
+
+export default connect(
+  mapStateToProps,
+  { setIngredientesUser, getIngredientesUser }
+)(List);
