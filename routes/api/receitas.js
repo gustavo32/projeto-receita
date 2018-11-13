@@ -77,6 +77,30 @@ router.get("/ingredientes_user/:token", (req, res) => {
   );
 });
 
+router.post("/salvar_ingredientes_vazio/:token", (req, res) => {
+  let ing = [];
+  //console.log(req.params.token);
+  UserSession.find({ _id: req.params.token }, (err, ok) => {
+    if (ok) {
+      User.updateOne(
+        { _id: ok[0].userId },
+        { $set: { ingredientes: ing } },
+        (err, ok) => {
+          if (err) {
+            return res.send({
+              success: false
+            });
+          } else {
+            return res.send({
+              success: true
+            });
+          }
+        }
+      );
+    }
+  });
+});
+
 router.post("/salvar_ingredientes/:token/:ingredientes", (req, res) => {
   ing = req.params.ingredientes.split(",");
   //console.log(req.params.token);

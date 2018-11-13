@@ -42,7 +42,8 @@ export default function(state = initalState, action) {
   switch (action.type) {
     case SET_INGREDIENTES_USER:
       return {
-        ...state
+        ...state,
+        ingredientesUser: action.ingredientes
       };
 
     case GET_INGREDIENTES_USER:

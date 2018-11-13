@@ -14,20 +14,6 @@ class List extends React.Component {
     });
   }
 
-  componentDidUpdate(prevState, nowState) {
-    if (prevState !== nowState) {
-      let close = document.getElementsByClassName("close");
-
-      for (let i = 0; i < close.length; i++) {
-        close[i].onclick = this.handleClick;
-      }
-    }
-  }
-
-  state = {
-    ingredientes: []
-  };
-
   render() {
     return (
       <div className="mt-4">
@@ -64,14 +50,8 @@ class List extends React.Component {
     for (let i = 0; i < m.childNodes.length; i++) {
       ingred.push(m.childNodes[i].textContent.slice(0, -1));
     }
-    this.setState(
-      {
-        ingredientes: ingred
-      },
-      res => {
-        this.updateDB();
-      }
-    );
+    console.log(ingred);
+    this.props.setIngredientesUser(ingred, this.props.item.token);
   };
 
   newElement = () => {
@@ -103,21 +83,13 @@ class List extends React.Component {
         for (let i = 0; i < close.length; i++) {
           close[i].onclick = this.handleClick;
         }
-
-        let m = document.getElementById("myUL");
-        let ingred = [];
-        for (let i = 0; i < m.childNodes.length; i++) {
-          ingred.push(m.childNodes[i].textContent.slice(0, -1));
-        }
-        this.setState(
-          {
-            ingredientes: ingred
-          },
-          res => {
-            this.updateDB();
-          }
-        );
       }
+      let m = document.getElementById("myUL");
+      let ingred = [];
+      for (let i = 0; i < m.childNodes.length; i++) {
+        ingred.push(m.childNodes[i].textContent.slice(0, -1));
+      }
+      this.props.setIngredientesUser(ingred, this.props.item.token);
     } else {
       alert("Você deve digitar algo!");
     }

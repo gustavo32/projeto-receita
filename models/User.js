@@ -17,7 +17,10 @@ const UserSchema = new Schema({
     default: ""
   },
   likes: [],
-  ingredientes: []
+  ingredientes: {
+    type: Array,
+    default: []
+  }
 });
 
 UserSchema.methods.generateHash = function(senha) {
