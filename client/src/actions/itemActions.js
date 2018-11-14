@@ -1,7 +1,6 @@
 import {
   GET_RECEITAS,
   ITEMS_LOADING,
-  PUT_LIKE,
   SET_TOKEN,
   SET_LOGIN,
   SET_SIGNUP,
@@ -11,7 +10,8 @@ import {
   HIDE_MODAL,
   LOGGED_IN,
   SET_INGREDIENTES_USER,
-  GET_INGREDIENTES_USER
+  GET_INGREDIENTES_USER,
+  GET_LIKE
 } from "./types";
 import axios from "axios";
 import { setInStorage, getFromStorage } from "../utils/storage";
@@ -51,7 +51,6 @@ export const getIngredientesUser = token => dispatch => {
         let t = document.createTextNode(ingred[i]);
         let li = document.createElement("li");
         li.appendChild(t);
-
         document.getElementById("myUL").appendChild(li);
 
         document.getElementById("myInput").value = "";
@@ -82,11 +81,22 @@ export const getIngredientesUser = token => dispatch => {
   });
 };
 
-export const putLike = (props, userToken) => dispatch => {
-  axios.put(`/api/receitas/putLike/${props.id}/${userToken}`).then(res => {
+export const postLike = (props, userToken) => dispatch => {
+  axios.post(`/api/receitas/putLike/${props.id}/${userToken}`).then(res => {
+    dispatch(getLike(userToken));
+  });
+};
+
+export const postDislike = (props, userToken) => dispatch => {
+  axios.post(`/api/receitas/postDislike/${props.id}/${userToken}`).then(res => {
+    dispatch(getLike(userToken));
+  });
+};
+
+export const getLike = userToken => dispatch => {
+  axios.get(`/api/receitas/getLike/${userToken}`).then(res => {
     dispatch({
-      type: PUT_LIKE,
-      id: props.id,
+      type: GET_LIKE,
       likes: res.data.likes
     });
   });
@@ -162,6 +172,7 @@ export const setLoginInitial = () => dispatch => {
           loginState: true
         });
         dispatch(getIngredientesUser(token));
+        dispatch(getLike(token));
       }
     });
   }
@@ -190,6 +201,7 @@ export const setLogin = (email, senha) => dispatch => {
       if (json.payload.success) {
         setInStorage("the_main_app", { token: json.payload.token });
         dispatch(getIngredientesUser(json.payload.token));
+        dispatch(getLike(json.payload.token));
       }
     });
 };

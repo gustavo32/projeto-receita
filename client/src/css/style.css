@@ -13,6 +13,11 @@ html {
   padding: 0px;
   font-family: "Raleway", sans-serif;
   background-color: #f0f0f0;
+  -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1.5s; /* Firefox < 16 */
+  -ms-animation: fadein 1.5s; /* Internet Explorer */
+  -o-animation: fadein 1.5s; /* Opera < 12.1 */
+  animation: fadein 1.5s;
 }
 
 @font-face {
@@ -65,6 +70,55 @@ a {
   overflow: auto;
 }
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #myUL li {
   cursor: pointer;
   position: relative;
@@ -72,15 +126,20 @@ a {
   list-style-type: none;
   background: #eee;
   font-size: 18px;
-  transition: 0.2s;
+  transition: 0.3s;
 
   /* make the list items unselectable */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
+  -webkit-animation: fadein 0.3s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 0.3s; /* Firefox < 16 */
+  -ms-animation: fadein 0.3s; /* Internet Explorer */
+  -o-animation: fadein 0.3s; /* Opera < 12.1 */
+  animation: fadein 0.3s;
+}
 /* Set all odd list items to a different color (zebra-stripes) */
 #myUL li:nth-child(odd) {
   background: #f9f9f9;

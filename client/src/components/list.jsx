@@ -55,6 +55,7 @@ class List extends React.Component {
   };
 
   newElement = () => {
+    console.log(this.props.item.likes);
     let inputValue = document.getElementById("myInput").value;
     if (inputValue !== "") {
       let array = inputValue.split(",");
@@ -66,7 +67,7 @@ class List extends React.Component {
         t = document.createTextNode(array[i]);
         let li = document.createElement("li");
         li.appendChild(t);
-
+        li.className = "newFade";
         document.getElementById("myUL").appendChild(li);
 
         document.getElementById("myInput").value = "";

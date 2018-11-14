@@ -11,3 +11,5 @@ export const HIDE_MODAL = "HIDE_MODAL";
 export const LOGGED_IN = "LOGGED_IN";
 export const SET_INGREDIENTES_USER = "SET_INGREDIENTES_USER";
 export const GET_INGREDIENTES_USER = "GET_INGREDIENTES_USER";
+export const GET_LIKE = "GET_LIKE";
+export const POST_DISLIKE = "POST_DISLIKE";

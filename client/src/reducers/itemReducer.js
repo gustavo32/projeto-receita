@@ -2,7 +2,6 @@
 import {
   GET_RECEITAS,
   ITEMS_LOADING,
-  PUT_LIKE,
   SET_TOKEN,
   SET_LOGIN,
   SET_SIGNUP,
@@ -12,12 +11,14 @@ import {
   HIDE_MODAL,
   LOGGED_IN,
   SET_INGREDIENTES_USER,
-  GET_INGREDIENTES_USER
+  GET_INGREDIENTES_USER,
+  GET_LIKE
 } from "../actions/types";
 
 const initalState = {
   receitas: [],
   loading: false,
+  likes: [],
   ingredientesUser: [],
   token: "",
   signInEmail: "",
@@ -51,7 +52,11 @@ export default function(state = initalState, action) {
         ...state,
         ingredientesUser: action.ingredientes
       };
-
+    case GET_LIKE:
+      return {
+        ...state,
+        likes: action.likes
+      };
     case GET_RECEITAS:
       return {
         ...state,
@@ -75,10 +80,6 @@ export default function(state = initalState, action) {
       return {
         ...state,
         loading: true
-      };
-    case PUT_LIKE:
-      return {
-        ...state
       };
     case SET_LOGOUT:
       return {

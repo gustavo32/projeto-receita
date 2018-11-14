@@ -18,28 +18,90 @@ router.get("/otherContent", (req, res) => {
     .then(receitas => res.json(receitas));
 });
 
-router.put("/putLike/:idReceita/:userToken", (req, res) => {
-  Receita.update(
-    { _id: req.params.idReceita },
-    { $inc: { likes_total: 1 } },
-    {},
-    (err, numberAffected) => {
-      if (!err) {
-        Receita.find({ _id: req.query.id }, (err, field) => {
-          if (!err) {
+router.get("/getLike/:userToken", (req, res) => {
+  UserSession.find(
+    {
+      _id: req.params.userToken
+    },
+    (err, ok) => {
+      if (err) {
+        return res.send({
+          success: false,
+          likes: []
+        });
+      }
+      if (ok) {
+        User.find({ _id: ok[0].userId }, (err2, ok2) => {
+          if (ok2) {
             return res.send({
               success: true,
-              likes: field[0].likes_total
-            });
-          } else {
-            return res.send({
-              success: false
+              likes: ok2[0].likes
             });
           }
         });
       }
     }
   );
+});
+
+router.post("/putLike/:idReceita/:userToken", (req, res) => {
+  Receita.updateOne(
+    { _id: req.params.idReceita },
+    { $inc: { likes_total: 1 } },
+    (err, element) => {
+      if (!err) {
+        UserSession.findById(req.params.userToken, (err, ok) => {
+          if (err) {
+            return res.send({
+              success: false
+            });
+          }
+          if (ok) {
+            User.updateOne(
+              { _id: ok.userId },
+              { $push: { likes: { id: req.params.idReceita, liked: true } } },
+              (err2, ok2) => {
+                if (ok2) {
+                  return res.send({
+                    success: true,
+                    likes: ok2.likes
+                  });
+                }
+              }
+            );
+          }
+        });
+      }
+    }
+  );
+});
+
+router.post("/postDislike/:idReceita/:userToken", (req, res) => {
+  UserSession.findById(req.params.userToken, (err, ok) => {
+    if (ok) {
+      User.updateOne(
+        { _id: ok.userId },
+        { $pull: { likes: { id: req.params.idReceita } } },
+        (err, acc) => {
+          if (acc) {
+            Receita.updateOne(
+              {
+                _id: req.params.idReceita
+              },
+              { $inc: { likes_total: -1 } },
+              (err2, ok2) => {
+                if (ok2) {
+                  return res.send({
+                    success: true
+                  });
+                }
+              }
+            );
+          }
+        }
+      );
+    }
+  });
 });
 
 router.get("/ingredientes_user/:token", (req, res) => {

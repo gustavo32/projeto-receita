@@ -1,9 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
-import { putLike, openModal } from "../actions/itemActions";
+import {
+  postLike,
+  openModal,
+  getLike,
+  postDislike
+} from "../actions/itemActions";
 import PropTypes from "prop-types";
 
 class RecommendFrame extends React.Component {
+  state = {
+    likes: [],
+    count: 0
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ likes: nextProps.item.likes });
+  }
+
   render() {
     return (
       <div className="mb-4">
@@ -46,20 +60,7 @@ class RecommendFrame extends React.Component {
               {this.tempo()}
               {this.displayText()}
             </div>
-            <div className="display-topright display-hover off">
-              <button
-                type="button"
-                className={this.classLike()}
-                title="Amei"
-                onClick={() => this.addLike()}
-              >
-                {this.getLikes()}
-                <i
-                  className="fa fa-heart"
-                  style={{ WebkitTextStroke: " 1px #f44336" }}
-                />
-              </button>
-            </div>
+            {this.ameiButton()}
             <div className="display-bottomleft display-hover text-white off">
               <div
                 className="padding animate-opacity"
@@ -79,24 +80,65 @@ class RecommendFrame extends React.Component {
       </div>
     );
   }
+  ameiButton = () => {
+    return (
+      <div className="display-topright display-hover off">
+        <button
+          type="button"
+          className={this.classLike()}
+          title="Amei"
+          onClick={() => this.addLike()}
+        >
+          {this.getLikes()}
+          <i
+            className="fa fa-heart"
+            style={{ WebkitTextStroke: " 1px #f44336" }}
+          />
+        </button>
+      </div>
+    );
+  };
+
   addLike = () => {
     if (this.props.item.isLoggedIn) {
-      this.props.putLike(this.props, this.props.item.token);
+      let likes = this.state.likes;
+      for (let i = 0; i < likes.length; i++) {
+        if (this.props.id === this.state.likes[i].id && this.state.count > -1) {
+          this.setState({
+            likes: this.state.likes.filter(item => item.id !== this.props.id)
+          });
+          this.props.postDislike(this.props, this.props.item.token);
+          this.setState({ count: this.state.count - 1 });
+          return;
+        }
+      }
+      if (this.state.count < 1) {
+        this.setState({
+          likes: [...this.state.likes, { id: this.props.id, liked: true }]
+        });
+        this.props.postLike(this.props, this.props.item.token);
+        this.setState({ count: this.state.count + 1 });
+      }
     } else {
       alert("Faça Login para curtir!");
     }
   };
-  classLike() {
-    let classe = "animate-opacity btn margin ";
-    if (this.props.item.isLoggedIn) {
-      return classe + "text-red";
-    } else {
-      return classe + "text-white-hover-red";
-    }
-  }
 
-  getLikes() {
-    if (this.props.likes > 0) {
+  classLike = () => {
+    let classe = "animate-opacity btn margin ";
+    if (this.state.likes) {
+      let likes = this.state.likes;
+      for (let i = 0; i < likes.length; i++) {
+        if (this.props.id === this.state.likes[i].id) {
+          return classe + "text-red";
+        }
+      }
+    }
+    return classe + "text-white-hover-red";
+  };
+
+  getLikes = () => {
+    if (this.props.likes + this.state.count > 0) {
       return (
         <span
           className="badge badge-pill badge-danger"
@@ -109,13 +151,13 @@ class RecommendFrame extends React.Component {
             top: "10%"
           }}
         >
-          {this.props.likes}
+          {this.props.likes + this.state.count}
         </span>
       );
     }
-  }
+  };
 
-  tempo() {
+  tempo = () => {
     if (this.props.tempo) {
       return (
         <div
@@ -131,8 +173,9 @@ class RecommendFrame extends React.Component {
       );
     } else {
     }
-  }
-  displayText() {
+  };
+
+  displayText = () => {
     if (this.props.tempo) {
       return (
         <div
@@ -164,20 +207,23 @@ class RecommendFrame extends React.Component {
         </div>
       );
     }
-  }
+  };
 }
 
 RecommendFrame.propTypes = {
-  putLike: PropTypes.func.isRequired,
+  getLike: PropTypes.func.isRequired,
+  postDislike: PropTypes.func.isRequired,
+  postLike: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+  likes_user: state.item.likes,
   item: state.item
 });
 
 export default connect(
   mapStateToProps,
-  { putLike, openModal }
+  { getLike, postLike, openModal, postDislike }
 )(RecommendFrame);
