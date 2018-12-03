@@ -9,7 +9,7 @@ import Modal from "./components/modal";
 class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{ position: "relative", minHeight: "100% !important" }}>
         <NavBar />
         <div className="row">
           <div className="col-md-6 col-sm-12">

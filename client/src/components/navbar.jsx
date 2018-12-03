@@ -1,9 +1,32 @@
 import React from "react";
 import logo from "../imagens/logo.png";
-import search_icon from "../imagens/search-icon.png";
+// import search_icon from "../imagens/search-icon.png";
 import Login from "./login";
+import { Link } from "react-router-dom";
+import history from "../history";
+import { connect } from "react-redux";
+import { getMoreReceitas } from "../actions/itemActions";
+import PropTypes from "prop-types";
 
 class NavBar extends React.Component {
+  state = {
+    onLoad: false
+  };
+  componentDidMount() {
+    let inputValue = document.getElementById("search");
+    inputValue.addEventListener("keyup", e => {
+      if (inputValue && inputValue.focus && e.keyCode === 13)
+        this.searchInput();
+    });
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.onLoad);
+    if (this.state.onLoad) {
+      document.getElementById("search").focus();
+    }
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg gradient-y-r">
@@ -11,31 +34,26 @@ class NavBar extends React.Component {
           className="container-fluid"
           style={{ display: "flex", whiteSpace: "nowrap" }}
         >
-          <img className="logo" src={logo} href="#" alt="logo" />
-          <form action="/" style={{ marginLeft: "80px" }}>
+          <Link to="/">
+            <img
+              className="logo"
+              src={logo}
+              alt="logo"
+              style={{ cursor: "pointer" }}
+            />
+          </Link>
+          <div style={{ marginLeft: "80px" }}>
             <input
               type="search"
+              id="search"
               className="hide-mobile"
-              style={{
-                borderRadius: 100,
-                paddingLeft: 20,
-                height: 30,
-                width: "280px"
-              }}
               placeholder="Pesquisar..."
             />
 
-            <button
-              type="submit"
-              style={{ cursor: "pointer", background: "none" }}
-            >
-              <img
-                src={search_icon}
-                style={{ width: 35, height: 35 }}
-                alt="search"
-              />
+            <button className="search-btn" onClick={() => this.searchInput()}>
+              <i className="fa fa-search" aria-hidden="true" />
             </button>
-          </form>
+          </div>
           <div>
             <a href="#!" className="hide-mobile">
               <span>Entradas</span>
@@ -56,6 +74,29 @@ class NavBar extends React.Component {
       </nav>
     );
   }
+  searchInput = () => {
+    let search = document.getElementById("search").value;
+    if (search) {
+      history.push("/verMais/descritive_search/" + search);
+      this.setState({ onLoad: true });
+      //window.location.reload();
+      document.onload = function() {
+        document.getElementById("default").focus();
+      };
+    }
+  };
 }
 
-export default NavBar;
+NavBar.propTypes = {
+  getMoreReceitas: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  item: state.item
+});
+
+export default connect(
+  mapStateToProps,
+  { getMoreReceitas }
+)(NavBar);

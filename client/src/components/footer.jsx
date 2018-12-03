@@ -20,17 +20,17 @@ class Footer extends React.Component {
             <div className="col-6">
               <ul className="social-link pull-right">
                 <li>
-                  <a href="">
+                  <a href="!#">
                     <span className="fa fa-facebook fa-lg" />
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="!#">
                     <span className="fa fa-twitter fa-lg" />
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="!#">
                     <span className="fa fa-instagram fa-lg" />
                   </a>
                 </li>

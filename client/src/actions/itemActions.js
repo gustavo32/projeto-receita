@@ -11,7 +11,9 @@ import {
   LOGGED_IN,
   SET_INGREDIENTES_USER,
   GET_INGREDIENTES_USER,
-  GET_LIKE
+  GET_LIKE,
+  GET_MORE_RECEITAS,
+  REMOVE_MORE_RECEITAS
 } from "./types";
 import axios from "axios";
 import { setInStorage, getFromStorage } from "../utils/storage";
@@ -26,6 +28,43 @@ export const getItemsPrimary = () => dispatch => {
       tipo: "primary"
     })
   );
+};
+
+export const removeMoreReceitas = () => {
+  return {
+    type: REMOVE_MORE_RECEITAS
+  };
+};
+
+export const getMoreReceitas = (option, counter = 0, itens) => dispatch => {
+  if (option === "primary") {
+    dispatch(setItemsLoading());
+    axios.get(`/api/receitas/moreReceitas/${option}/${counter}`).then(res =>
+      dispatch({
+        type: GET_MORE_RECEITAS,
+        payload: res.data
+      })
+    );
+  } else if (option === "exclusive_search") {
+    itens = itens.split(",");
+    dispatch(setItemsLoading());
+    axios.get(`/api/receitas/pesquisarLista/${itens}/${counter}`).then(res =>
+      dispatch({
+        type: GET_MORE_RECEITAS,
+        payload: res.data
+      })
+    );
+  } else if (option === "descritive_search") {
+    dispatch(setItemsLoading());
+    axios
+      .get(`/api/receitas/pesquisaDescritiva/${itens}/${counter}`)
+      .then(res =>
+        dispatch({
+          type: GET_MORE_RECEITAS,
+          payload: res.data
+        })
+      );
+  }
 };
 
 export const getItemsOther = () => dispatch => {
@@ -46,35 +85,37 @@ export const getIngredientesUser = token => dispatch => {
         type: GET_INGREDIENTES_USER,
         ingredientes: res.data.ingredientes
       });
-      let ingred = res.data.ingredientes;
-      for (let i = 0; i < ingred.length; i++) {
-        let t = document.createTextNode(ingred[i]);
-        let li = document.createElement("li");
-        li.appendChild(t);
-        document.getElementById("myUL").appendChild(li);
+      if (document.getElementById("myUL")) {
+        let ingred = res.data.ingredientes;
+        for (let i = 0; i < ingred.length; i++) {
+          let t = document.createTextNode(ingred[i]);
+          let li = document.createElement("li");
+          li.appendChild(t);
+          document.getElementById("myUL").appendChild(li);
 
-        document.getElementById("myInput").value = "";
-        document.getElementById("myInput").focus();
+          document.getElementById("myInput").value = "";
+          document.getElementById("myInput").focus();
 
-        let span = document.createElement("SPAN");
-        let txt = document.createTextNode("\u00D7");
-        span.className = "close";
-        span.appendChild(txt);
-        li.appendChild(span);
+          let span = document.createElement("SPAN");
+          let txt = document.createTextNode("\u00D7");
+          span.className = "close";
+          span.appendChild(txt);
+          li.appendChild(span);
 
-        let close = document.getElementsByClassName("close");
+          let close = document.getElementsByClassName("close");
 
-        for (let i = 0; i < close.length; i++) {
-          close[i].onclick = e => {
-            let div = e.target;
-            div.parentNode.remove(div);
-            let m = document.getElementById("myUL");
-            let ingred = [];
-            for (let i = 0; i < m.childNodes.length; i++) {
-              ingred.push(m.childNodes[i].textContent.slice(0, -1));
-            }
-            dispatch(setIngredientesUser(ingred, token));
-          };
+          for (let i = 0; i < close.length; i++) {
+            close[i].onclick = e => {
+              let div = e.target;
+              div.parentNode.remove(div);
+              let m = document.getElementById("myUL");
+              let ingred = [];
+              for (let i = 0; i < m.childNodes.length; i++) {
+                ingred.push(m.childNodes[i].textContent.slice(0, -1));
+              }
+              dispatch(setIngredientesUser(ingred, token));
+            };
+          }
         }
       }
     }

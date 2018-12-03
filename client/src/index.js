@@ -8,6 +8,7 @@ import "./css/style.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Router, Switch, Route } from "react-router-dom";
 import Cadastrar from "./components/cadastrar";
+import VerMais from "./components/verMais";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact={true} component={App} />
         <Route path="/cadastrar" component={Cadastrar} />
+        <Route path="/verMais/:option/:ingred" component={VerMais} />
       </Switch>
     </Router>
   </Provider>,

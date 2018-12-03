@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const UserSession = require("../../models/UserSession");
-
 const Receita = require("../../models/Receitas");
 
 router.get("/primaryContent", (req, res) => {
@@ -11,10 +10,19 @@ router.get("/primaryContent", (req, res) => {
     .then(receitas => res.json(receitas));
 });
 
+router.get("/moreReceitas/:option/:counter", (req, res) => {
+  let counter = parseInt(req.params.counter);
+  Receita.find()
+    .limit(16)
+    .skip(counter)
+    .then(receitas => res.json(receitas))
+    .catch(err => console.log(err));
+});
+
 router.get("/otherContent", (req, res) => {
   Receita.find()
+    .sort({ likes_total: -1 })
     .limit(8)
-    .skip(8)
     .then(receitas => res.json(receitas));
 });
 
@@ -74,6 +82,95 @@ router.post("/putLike/:idReceita/:userToken", (req, res) => {
       }
     }
   );
+});
+
+router.get("/pesquisarLista/:array/:counter", (req, res) => {
+  let counter = req.params.counter;
+  counter = parseInt(counter);
+  let itens = req.params.array;
+  let temperos = [
+    "alho",
+    "cebola",
+    "cebolinha",
+    "cebolinha verde",
+    "colorau",
+    "mostarda",
+    "orégano",
+    "oregano",
+    "pimenta reino",
+    "salsa",
+    "salsinha",
+    "água",
+    "açucar",
+    "acucar",
+    "açúcar",
+    "agua",
+    "sal",
+    "sal grosso"
+  ];
+  var spawn = require("child_process").spawn;
+  var process = spawn("python", ["./routes/api/dataCleaning.py", itens]);
+
+  process.stdout.on("data", data => {
+    data = data.toString("binary").split(",");
+    data[data.length - 1] = data[data.length - 1].replace("\r\n", "");
+    data = data.concat(temperos);
+    Receita.find({
+      $expr: {
+        $eq: [
+          {
+            $size: {
+              $setDifference: ["$ingredientes_limpos", data]
+            }
+          },
+          0
+        ]
+      }
+    })
+      .sort({ quantidade_ingre: -1 })
+      .limit(16)
+      .skip(counter)
+      .then(receitas => res.json(receitas))
+      .catch(err => console.log(err));
+  });
+});
+
+// router.get("/pesquisaDescritiva/:texto/:counter", (req, res) => {
+//   let texto = req.params.texto;
+//   let counter = parseInt(req.params.counter);
+//   let busca = new RegExp(".*" + texto + ".*", "gi");
+//   Receita.find({
+//     $or: [{ titulo: busca }, { "ingredientes.sub_lista": { $in: [busca] } }]
+//   })
+//     .limit(16)
+//     .skip(counter)
+//     .then(receitas => res.json(receitas));
+// });
+
+router.get("/pesquisaDescritiva/:texto/:counter", (req, res) => {
+  let texto = req.params.texto;
+  let counter = parseInt(req.params.counter);
+  var ing = texto.replace(",", " ").split(" ");
+  let busca = new RegExp(".*" + texto + ".*", "gi");
+
+  const spawn = require("child_process").spawn;
+  const pythonProcess = spawn("python", ["./routes/api/dataCleaning.py", ing]);
+
+  pythonProcess.stdout.on("data", data => {
+    ing = data
+      .toString("binary")
+      .replace("\r\n", "")
+      .split(",");
+    for (i = 0; i < ing.length; i++) {
+      ing[i] = new RegExp(".*(\\s|^)" + ing[i] + "(\\s|$).*", "gi");
+    }
+    Receita.find({
+      $or: [{ titulo: busca }, { titulo: { $all: ing } }]
+    })
+      .limit(16)
+      .skip(counter)
+      .then(receitas => res.json(receitas));
+  });
 });
 
 router.post("/postDislike/:idReceita/:userToken", (req, res) => {
@@ -141,7 +238,6 @@ router.get("/ingredientes_user/:token", (req, res) => {
 
 router.post("/salvar_ingredientes_vazio/:token", (req, res) => {
   let ing = [];
-  //console.log(req.params.token);
   UserSession.find({ _id: req.params.token }, (err, ok) => {
     if (ok) {
       User.updateOne(
@@ -165,7 +261,6 @@ router.post("/salvar_ingredientes_vazio/:token", (req, res) => {
 
 router.post("/salvar_ingredientes/:token/:ingredientes", (req, res) => {
   ing = req.params.ingredientes.split(",");
-  //console.log(req.params.token);
   UserSession.find({ _id: req.params.token }, (err, ok) => {
     if (ok) {
       User.updateOne(

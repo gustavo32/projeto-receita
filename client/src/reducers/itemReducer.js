@@ -12,13 +12,17 @@ import {
   LOGGED_IN,
   SET_INGREDIENTES_USER,
   GET_INGREDIENTES_USER,
-  GET_LIKE
+  GET_LIKE,
+  GET_MORE_RECEITAS,
+  REMOVE_MORE_RECEITAS
 } from "../actions/types";
 
 const initalState = {
-  receitas: [],
+  receitasPrimary: [],
+  receitasOther: [],
   loading: false,
   likes: [],
+  moreReceitas: [],
   ingredientesUser: [],
   token: "",
   signInEmail: "",
@@ -47,10 +51,21 @@ export default function(state = initalState, action) {
         ingredientesUser: action.ingredientes
       };
 
+    case REMOVE_MORE_RECEITAS:
+      return {
+        ...state,
+        moreReceitas: []
+      };
     case GET_INGREDIENTES_USER:
       return {
         ...state,
         ingredientesUser: action.ingredientes
+      };
+    case GET_MORE_RECEITAS:
+      return {
+        ...state,
+        moreReceitas: state.moreReceitas.concat(action.payload),
+        loading: false
       };
     case GET_LIKE:
       return {
@@ -58,14 +73,20 @@ export default function(state = initalState, action) {
         likes: action.likes
       };
     case GET_RECEITAS:
-      return {
-        ...state,
-        receitas: [
-          ...state.receitas,
-          { receita: action.payload, tipo: action.tipo }
-        ],
-        loading: false
-      };
+      if (action.tipo === "primary") {
+        return {
+          ...state,
+          receitasPrimary: action.payload,
+          loading: false
+        };
+      } else if (action.tipo === "other") {
+        return {
+          ...state,
+          receitasOther: action.payload,
+          loading: false
+        };
+      }
+      break;
     case SET_LOGIN_FB:
       return {
         ...state,

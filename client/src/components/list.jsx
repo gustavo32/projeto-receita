@@ -1,10 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {
-  setIngredientesUser,
-  getIngredientesUser
-} from "../actions/itemActions";
+import { setIngredientesUser, getMoreReceitas } from "../actions/itemActions";
+import history from "../history";
 
 class List extends React.Component {
   componentDidMount() {
@@ -24,14 +22,57 @@ class List extends React.Component {
               <span onClick={this.newElement} className="addBtn">
                 <i className="fa fa-arrow-right" />
               </span>
+              <div style={{ marginLeft: "90%", paddingTop: "10px" }}>
+                <span className="badge-info">
+                  <i className="fa fa-question">
+                    <span
+                      class="tooltiptext"
+                      style={{
+                        padding: "8px 5px 8px 5px",
+                        justifyContent: "justify"
+                      }}
+                    >
+                      Não se preocupe com os temperos básicos, nós já
+                      adicionamos para você!
+                    </span>
+                  </i>
+                </span>
+              </div>
             </div>
           </div>
 
           <ul id="myUL" />
         </div>
+        <div style={{ textAlign: "center" }}>
+          <button
+            type="button"
+            className="border white btn round mt-1 hover-orange"
+            onClick={() => this.handlePesquisar()}
+          >
+            Pesquisar{" "}
+            <i
+              className="fa fa-search"
+              style={{ paddingLeft: "10px" }}
+              aria-hidden="true"
+            />
+          </button>
+        </div>
       </div>
     );
   }
+
+  handlePesquisar = () => {
+    let m = document.getElementById("myUL");
+    let ingred = [];
+    for (let i = 0; i < m.childNodes.length; i++) {
+      ingred.push(m.childNodes[i].textContent.slice(0, -1));
+    }
+    if (ingred.length > 0) {
+      history.push(`/verMais/exclusive_search/${ingred}`);
+    } else {
+      alert("Você precisa colocar seus ingredientes primeiro!");
+    }
+  };
 
   updateDB = () => {
     if (this.props.item.isLoggedIn) {
@@ -50,12 +91,10 @@ class List extends React.Component {
     for (let i = 0; i < m.childNodes.length; i++) {
       ingred.push(m.childNodes[i].textContent.slice(0, -1));
     }
-    console.log(ingred);
     this.props.setIngredientesUser(ingred, this.props.item.token);
   };
 
   newElement = () => {
-    console.log(this.props.item.likes);
     let inputValue = document.getElementById("myInput").value;
     if (inputValue !== "") {
       let array = inputValue.split(",");
@@ -99,7 +138,8 @@ class List extends React.Component {
 
 List.propTypes = {
   item: PropTypes.object.isRequired,
-  setIngredientesUser: PropTypes.func.isRequired
+  setIngredientesUser: PropTypes.func.isRequired,
+  getMoreReceitas: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -108,5 +148,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setIngredientesUser, getIngredientesUser }
+  { setIngredientesUser, getMoreReceitas }
 )(List);

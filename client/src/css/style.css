@@ -145,6 +145,85 @@ a {
   background: #f9f9f9;
 }
 
+#search {
+  border-radius: 100px 0 0 100px;
+  padding-left: 20;
+  height: 30px;
+  width: 280px;
+  outline: 0;
+}
+
+.search-btn {
+  cursor: pointer;
+  background: "none";
+  color: white;
+  background: #555;
+  width: 40px;
+  height: 30px;
+  padding-right: 5px;
+  border-radius: 0px 100px 100px 0;
+  position: relative;
+  outline: 0;
+}
+
+.search-btn:before {
+  border: 14px solid transparent;
+  border-right-color: #555;
+  content: "";
+  left: -23px;
+  top: 1px;
+  position: absolute;
+}
+
+.badge-info {
+  padding: 3px 11px 3px 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background: #555 !important;
+  color: white;
+  cursor: pointer;
+  font-size: 18px !important;
+  font-weight: 800;
+  transition: 0.3s;
+}
+
+.badge-info:hover {
+  filter: drop-shadow(-4px 5px 5px rgba(0, 0, 0, 0.7));
+}
+
+.badge-info .tooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: rgba(85, 85, 85, 0.8);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -80px;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.badge-info .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(85, 85, 85, 0.8) transparent transparent transparent;
+}
+
+.badge-info:hover .tooltiptext {
+  visibility: visible;
+}
+
 /* Darker background-color on hover */
 #myUL li:hover {
   background: #ddd;
@@ -277,6 +356,10 @@ form {
 
 @media only screen and (max-width: 990px) {
   .hide-mobile {
+    display: none;
+  }
+
+  .search-btn {
     display: none;
   }
 
@@ -428,6 +511,20 @@ hr {
   background-color: #ff8c00 !important;
 }
 
+.white {
+  background-color: #fff !important;
+  color: #ff8c00 !important;
+}
+
+.border {
+  border: 1px solid #ff8c00 !important;
+}
+
+button.hover-orange:hover {
+  color: #fff !important;
+  background-color: #ff8c00 !important;
+}
+
 .animate-opacity {
   animation: opac 0.4s;
 }
@@ -549,6 +646,64 @@ div .text-center {
 
 .display-container {
   position: relative;
+}
+
+.centralize .progress {
+  height: 30px;
+  padding-top: 20px;
+  background: none;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.progress span {
+  transition: all 500ms ease;
+  background: white;
+  box-shadow: 1px 2px 3px #999;
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+  border-radius: 10px;
+  animation: wave 2s ease infinite;
+}
+
+.progress span:nth-child(1) {
+  animation-delay: 0;
+}
+.progress span:nth-child(2) {
+  animation-delay: 100ms;
+}
+.progress span:nth-child(3) {
+  animation-delay: 200ms;
+}
+.progress span:nth-child(4) {
+  animation-delay: 300ms;
+}
+.progress span:nth-child(5) {
+  animation-delay: 400ms;
+}
+/* .progress span:nth-child(6) {
+  animation-delay: 500ms;
+}
+.progress span:nth-child(7) {
+  animation-delay: 600ms;
+}
+.progress span:nth-child(8) {
+  animation-delay: 700ms;
+} */
+
+@keyframes wave {
+  0%,
+  40%,
+  100% {
+    transform: translate(0, 0);
+    background-color: white;
+  }
+  10% {
+    transform: translate(0, -15px);
+    background-color: #e61d10;
+  }
 }
 
 .footer-bottom {

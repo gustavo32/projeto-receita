@@ -9,16 +9,24 @@ import {
 import PropTypes from "prop-types";
 
 class RecommendFrame extends React.Component {
-  state = {
-    likes: [],
-    count: 0
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      likes: [],
+      count: 0
+    };
+  }
+  componentDidMount() {
+    this.setState({ likes: this.props.item.likes });
+  }
   componentWillReceiveProps(nextProps) {
-    this.setState({ likes: nextProps.item.likes });
+    if (nextProps.item.likes.length !== this.props.item.likes.length) {
+      this.setState({ likes: nextProps.item.likes });
+    }
   }
 
   render() {
+    let imagem = this.props.img;
     return (
       <div className="mb-4">
         <div
@@ -32,7 +40,7 @@ class RecommendFrame extends React.Component {
             style={{ transition: "0.5s", width: "100%" }}
           >
             <img
-              src={this.props.img}
+              src={imagem}
               alt="receita"
               style={{
                 width: "100%",
@@ -74,7 +82,9 @@ class RecommendFrame extends React.Component {
             </div>
           </div>
           <div className="text-title">
-            <span>{this.props.titulo}</span>
+            <span style={{ textTransform: "capitalize" }}>
+              {this.props.titulo}
+            </span>
           </div>
         </div>
       </div>
@@ -113,9 +123,12 @@ class RecommendFrame extends React.Component {
         }
       }
       if (this.state.count < 1) {
-        this.setState({
-          likes: [...this.state.likes, { id: this.props.id, liked: true }]
-        });
+        this.setState(
+          {
+            likes: [...this.state.likes, { id: this.props.id, liked: true }]
+          },
+          () => this.classLike("animate-opacity btn margin text-red", true)
+        );
         this.props.postLike(this.props, this.props.item.token);
         this.setState({ count: this.state.count + 1 });
       }
@@ -124,8 +137,10 @@ class RecommendFrame extends React.Component {
     }
   };
 
-  classLike = () => {
-    let classe = "animate-opacity btn margin ";
+  classLike = (classe = "animate-opacity btn margin ", ignore = false) => {
+    if (ignore) {
+      return classe;
+    }
     if (this.state.likes) {
       let likes = this.state.likes;
       for (let i = 0; i < likes.length; i++) {
@@ -176,7 +191,7 @@ class RecommendFrame extends React.Component {
   };
 
   displayText = () => {
-    if (this.props.tempo) {
+    if (this.props.tempo && this.props.porcoes) {
       return (
         <div
           className="display-middle display-hover off"
@@ -191,7 +206,7 @@ class RecommendFrame extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } else if (this.props.porcoes) {
       return (
         <div
           className="display-middle display-hover off"
@@ -206,6 +221,8 @@ class RecommendFrame extends React.Component {
           </div>
         </div>
       );
+    } else {
+      return null;
     }
   };
 }
