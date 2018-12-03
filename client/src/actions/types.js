@@ -1,0 +1,17 @@
+export const GET_RECEITAS = "GET_RECEITAS";
+export const ITEMS_LOADING = "ITEMS_LOADING";
+export const PUT_LIKE = "PUT_LIKE";
+export const SET_TOKEN = "SET_TOKEN";
+export const SET_LOGIN = "SET_LOGIN";
+export const SET_SIGNUP = "SET_SIGNUP";
+export const SET_LOGIN_FB = "SET_LOGIN_FB";
+export const SET_LOGOUT = "SET_LOGOUT";
+export const OPEN_MODAL = "OPEN_MODAL";
+export const HIDE_MODAL = "HIDE_MODAL";
+export const LOGGED_IN = "LOGGED_IN";
+export const SET_INGREDIENTES_USER = "SET_INGREDIENTES_USER";
+export const GET_INGREDIENTES_USER = "GET_INGREDIENTES_USER";
+export const GET_LIKE = "GET_LIKE";
+export const POST_DISLIKE = "POST_DISLIKE";
+export const GET_MORE_RECEITAS = "GET_MORE_RECEITAS";
+export const REMOVE_MORE_RECEITAS = "REMOVE_MORE_RECEITAS";
