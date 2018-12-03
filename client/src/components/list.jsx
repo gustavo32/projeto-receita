@@ -26,7 +26,7 @@ class List extends React.Component {
                 <span className="badge-info">
                   <i className="fa fa-question">
                     <span
-                      class="tooltiptext"
+                      className="tooltiptext"
                       style={{
                         padding: "8px 5px 8px 5px",
                         justifyContent: "justify"

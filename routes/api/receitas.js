@@ -132,6 +132,10 @@ router.get("/pesquisarLista/:array/:counter", (req, res) => {
       .skip(counter)
       .then(receitas => res.json(receitas))
       .catch(err => console.log(err));
+
+    process.on("exit", code => {
+      console.log("Process quit with code : " + code);
+    });
   });
 });
 
