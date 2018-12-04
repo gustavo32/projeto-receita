@@ -4,13 +4,13 @@ import sys
 
 stopwords = list()
 
-with open("routes/api/stopwords.txt", "r", encoding="utf8") as file1:
+with open("./routes/api/stopwords.txt", "r", encoding="utf8") as file1:
     for item in file1:
         stopwords.append(item.replace("\n", ""))
 
 listaTemperos = list()
 
-with open("routes/api/ListaTemperos.txt", "r", encoding="utf8") as file1:
+with open("./routes/api/ListaTemperos.txt", "r", encoding="utf8") as file1:
     for item in file1:
         listaTemperos.append(item.replace("\n", ""))
 

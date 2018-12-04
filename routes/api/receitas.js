@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../../models/User");
 const UserSession = require("../../models/UserSession");
 const Receita = require("../../models/Receitas");
+const fs = require("fs");
 
 router.get("/primaryContent", (req, res) => {
   Receita.find()
@@ -84,6 +85,76 @@ router.post("/putLike/:idReceita/:userToken", (req, res) => {
   );
 });
 
+function replaceAll(str, de, para) {
+  var pos = str.indexOf(de);
+  while (pos > -1) {
+    str = str.replace(de, para);
+    pos = str.indexOf(de);
+  }
+  return str;
+}
+
+function readAndCleanData(itens) {
+  itens = itens.split(",");
+  let data = fs.readFileSync("./routes/api/stopwords.txt", "utf8");
+  let stopwords = data.split("\n");
+  //console.log(itens);
+  table = [
+    ".",
+    ",",
+    ";",
+    ":",
+    "?",
+    "!",
+    "(",
+    "),",
+    "-",
+    "_",
+    "[",
+    "]",
+    "*",
+    "/",
+    "“",
+    "”",
+    "\\",
+    '"',
+    "'",
+    "‘",
+    "’",
+    "•",
+    "¿",
+    "º",
+    "´",
+    "«",
+    "ª",
+    "©",
+    "¹",
+    "²"
+  ];
+  let re = /(\d+)/g;
+  let ingre_limpos = [];
+  for (let j = 0; j < itens.length; j++) {
+    for (let i = 0; i < table.length; i++) {
+      itens[j] = replaceAll(itens[j], table[i], " ");
+    }
+    itens[j] = itens[j].toLowerCase();
+    itens[j] = itens[j].trim();
+    itens[j] = itens[j].replace(re, "");
+    let queryword = itens[j].split(" ");
+    let resultword = [];
+    let result;
+    for (let i = 0; i < queryword.length; i++) {
+      for (let k = 0; k < stopwords.length; k++) {
+        if (queryword[i].toLowerCase() === stopwords[k]) break;
+        if (k + 1 === stopwords.length) resultword.push(queryword[i]);
+      }
+    }
+    result = resultword.join(" ");
+    if (result !== "") ingre_limpos.push(result);
+  }
+  return ingre_limpos;
+}
+
 router.get("/pesquisarLista/:array/:counter", (req, res) => {
   let counter = req.params.counter;
   counter = parseInt(counter);
@@ -108,36 +179,81 @@ router.get("/pesquisarLista/:array/:counter", (req, res) => {
     "sal",
     "sal grosso"
   ];
-  var spawn = require("child_process").spawn;
-  var process = spawn("python", ["./routes/api/dataCleaning.py", itens]);
-
-  process.stdout.on("data", data => {
-    data = data.toString("binary").split(",");
-    data[data.length - 1] = data[data.length - 1].replace("\r\n", "");
-    data = data.concat(temperos);
-    Receita.find({
-      $expr: {
-        $eq: [
-          {
-            $size: {
-              $setDifference: ["$ingredientes_limpos", data]
-            }
-          },
-          0
-        ]
-      }
-    })
-      .sort({ quantidade_ingre: -1 })
-      .limit(16)
-      .skip(counter)
-      .then(receitas => res.json(receitas))
-      .catch(err => console.log(err));
-
-    process.on("exit", code => {
-      console.log("Process quit with code : " + code);
-    });
-  });
+  let ingre_limpos = readAndCleanData(itens);
+  ingre_limpos = ingre_limpos.concat(temperos);
+  Receita.find({
+    $expr: {
+      $eq: [
+        {
+          $size: {
+            $setDifference: ["$ingredientes_limpos", ingre_limpos]
+          }
+        },
+        0
+      ]
+    }
+  })
+    .sort({ quantidade_ingre: -1 })
+    .limit(16)
+    .skip(counter)
+    .then(receitas => res.json(receitas))
+    .catch(err => console.log(err));
 });
+
+// router.get("/pesquisarLista/:array/:counter", (req, res) => {
+//   let counter = req.params.counter;
+//   counter = parseInt(counter);
+//   let itens = req.params.array;
+//   let temperos = [
+//     "alho",
+//     "cebola",
+//     "cebolinha",
+//     "cebolinha verde",
+//     "colorau",
+//     "mostarda",
+//     "orégano",
+//     "oregano",
+//     "pimenta reino",
+//     "salsa",
+//     "salsinha",
+//     "água",
+//     "açucar",
+//     "acucar",
+//     "açúcar",
+//     "agua",
+//     "sal",
+//     "sal grosso"
+//   ];
+//   var spawn = require("child_process").spawn;
+//   var process = spawn("python", ["./routes/api/dataCleaning.py", itens]);
+
+//   process.stdout.on("data", data => {
+//     data = data.toString("binary").split(",");
+//     data[data.length - 1] = data[data.length - 1].replace("\r\n", "");
+//     data = data.concat(temperos);
+//     Receita.find({
+//       $expr: {
+//         $eq: [
+//           {
+//             $size: {
+//               $setDifference: ["$ingredientes_limpos", data]
+//             }
+//           },
+//           0
+//         ]
+//       }
+//     })
+//       .sort({ quantidade_ingre: -1 })
+//       .limit(16)
+//       .skip(counter)
+//       .then(receitas => res.json(receitas))
+//       .catch(err => console.log(err));
+
+//     process.on("exit", code => {
+//       console.log("Process quit with code : " + code);
+//     });
+//   });
+// });
 
 // router.get("/pesquisaDescritiva/:texto/:counter", (req, res) => {
 //   let texto = req.params.texto;
@@ -154,27 +270,20 @@ router.get("/pesquisarLista/:array/:counter", (req, res) => {
 router.get("/pesquisaDescritiva/:texto/:counter", (req, res) => {
   let texto = req.params.texto;
   let counter = parseInt(req.params.counter);
-  var ing = texto.replace(",", " ").split(" ");
+  var ing = texto.replace(",", " ");
   let busca = new RegExp(".*" + texto + ".*", "gi");
 
-  const spawn = require("child_process").spawn;
-  const pythonProcess = spawn("python", ["./routes/api/dataCleaning.py", ing]);
+  ing = readAndCleanData(ing);
 
-  pythonProcess.stdout.on("data", data => {
-    ing = data
-      .toString("binary")
-      .replace("\r\n", "")
-      .split(",");
-    for (i = 0; i < ing.length; i++) {
-      ing[i] = new RegExp(".*(\\s|^)" + ing[i] + "(\\s|$).*", "gi");
-    }
-    Receita.find({
-      $or: [{ titulo: busca }, { titulo: { $all: ing } }]
-    })
-      .limit(16)
-      .skip(counter)
-      .then(receitas => res.json(receitas));
-  });
+  for (i = 0; i < ing.length; i++) {
+    ing[i] = new RegExp(".*(\\s|^)" + ing[i] + "(\\s|$).*", "gi");
+  }
+  Receita.find({
+    $or: [{ titulo: busca }, { titulo: { $all: ing } }]
+  })
+    .limit(16)
+    .skip(counter)
+    .then(receitas => res.json(receitas));
 });
 
 router.post("/postDislike/:idReceita/:userToken", (req, res) => {

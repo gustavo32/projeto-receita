@@ -3,9 +3,6 @@ cebola
 cebolinha
 cebolinha verde
 colorau
-manjericão
-manjericao
-mostarda
 orégano
 oregano
 pimenta
@@ -17,7 +14,6 @@ pimenta calabresa
 pimenta reino
 pimenta malagueta
 salsa
-canela
 salsinha
 água
 agua

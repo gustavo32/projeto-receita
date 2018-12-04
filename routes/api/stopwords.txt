@@ -5,6 +5,11 @@ picados
 picadas
 unidade
 unidades
+instantâneo
+instantaneo
+medidor
+refinado
+expresso
 dente
 dentes
 esmagados
@@ -41,10 +46,41 @@ fresca
 frescos
 frescas
 xícara
+xícara café
+xícara cafés
+xícara cafe
+xícara cafes
+xícara ccafé
 xícaras
+xícaras café
+xícaras cafés
+xícaras cafe
+xícaras cafes
+xícaras ccafé
 xicara
+xicara café
+xicara cafés
+xicara cafe
+xicara cafes
+xicara ccafé
 xicaras
+xicaras café
+xicaras cafés
+xicaras cafe
+xicaras cafes
+xicaras ccafé
 xic
+xic café
+xic cafés
+xic cafe
+xic cafes
+xic ccafé
+xíc
+xíc café
+xíc cafés
+xíc cafe
+xíc cafes
+xíc ccafé
 suco
 sucos
 pau
@@ -54,7 +90,17 @@ misturas
 litro
 litros
 colheres
+colheres café
+colheres cafés
+colheres cafe
+colheres cafes
+colheres ccafé
 colher
+colher café
+colher cafés
+colher cafe
+colher cafes
+colher ccafé
 folhas
 folha
 moídas
@@ -220,11 +266,6 @@ assados
 assadas
 caixinha
 caixinhas
-café
-cafés
-cafe
-cafes
-ccafé
 frio
 fria
 frios
@@ -541,8 +582,8 @@ quase
 alto
 baixo
 add
-x
 ª
+x
 co
 h
 dia
@@ -927,6 +968,8 @@ prontos
 prontas
 solúvel
 solúveis
+soluvel
+soluveis
 tempere
 levemente
 tigela
@@ -1622,6 +1665,11 @@ solida
 solidas
 solidos
 colhers
+colhers café
+colhers cafés
+colhers cafe
+colhers cafes
+colhers ccafé
 formado
 formada
 formados
@@ -1810,6 +1858,11 @@ miúdos
 miudos
 dicas
 colhere
+colhere café
+colhere cafés
+colhere cafe
+colhere cafes
+colhere ccafé
 dicas
 basta
 aferventada
@@ -1872,7 +1925,17 @@ diferentes
 espinha
 espinhas
 colheradas
+colheradas café
+colheradas cafés
+colheradas cafe
+colheradas cafes
+colheradas ccafé
 colherada
+colherada café
+colherada cafés
+colherada cafe
+colherada cafes
+colherada ccafé
 deixado
 brilho
 brilhos
@@ -1951,7 +2014,17 @@ crua
 cruas
 tender
 colherinha
+colherinha café
+colherinha cafés
+colherinha cafe
+colherinha cafes
+colherinha ccafé
 colherinhas
+colherinhas café
+colherinhas cafés
+colherinhas cafe
+colherinhas cafes
+colherinhas ccafé
 cuidado
 cuidados
 sopade
@@ -2135,7 +2208,7 @@ hei
 há
 havemos
 hão
-houve
+houve122
 houvemos
 houveram
 houvera
