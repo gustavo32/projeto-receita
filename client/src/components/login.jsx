@@ -22,7 +22,11 @@ class Login extends React.Component {
       return (
         <span className="dropdown">
           <span>
-            Entrar
+            <span className="sign-in">Entrar</span>
+            <i
+              className="show-mobile fa fa-user-circle-o big"
+              aria-hidden="true"
+            />
             <ul className="dropdown-content">
               <li>
                 {signInError ? (
@@ -62,7 +66,8 @@ class Login extends React.Component {
     } else if (token) {
       return (
         <span className="logout" onClick={this.props.setLogout}>
-          Sair
+          <span className="sign-in">Sair</span>
+          <i class="show-mobile fa fa-sign-out big" aria-hidden="true" />
         </span>
       );
     }

@@ -10,7 +10,7 @@ class Footer extends React.Component {
             <div className="col-6">
               <div className="copyright-text">
                 <p>
-                  © 2018 CopyRight:{" "}
+                  <span className="hide-mobile">© 2018 CopyRight: </span>
                   <Link to="/" style={{ fontWeight: "bold" }}>
                     AcaFood
                   </Link>

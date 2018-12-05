@@ -100,10 +100,7 @@ class RecommendFrame extends React.Component {
           onClick={() => this.addLike()}
         >
           {this.getLikes()}
-          <i
-            className="fa fa-heart"
-            style={{ WebkitTextStroke: " 1px #f44336" }}
-          />
+          <i className="fa fa-heart" style={{ WebkitTextStroke: " 1px red" }} />
         </button>
       </div>
     );

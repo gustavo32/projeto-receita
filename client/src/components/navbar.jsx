@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 
 class NavBar extends React.Component {
   state = {
-    onLoad: false
+    onLoad: false,
+    search_ready: false
   };
   componentDidMount() {
     let inputValue = document.getElementById("search");
@@ -42,13 +43,8 @@ class NavBar extends React.Component {
               style={{ cursor: "pointer" }}
             />
           </Link>
-          <div style={{ marginLeft: "80px" }}>
-            <input
-              type="search"
-              id="search"
-              className="hide-mobile"
-              placeholder="Pesquisar..."
-            />
+          <div className="space-80">
+            <input type="search" id="search" placeholder="Pesquisar..." />
 
             <button className="search-btn" onClick={() => this.searchInput()}>
               <i className="fa fa-search" aria-hidden="true" />
@@ -74,18 +70,35 @@ class NavBar extends React.Component {
       </nav>
     );
   }
+
   searchInput = () => {
-    let search = document.getElementById("search").value;
-    if (search) {
-      history.push("/verMais/descritive_search/" + search);
-      this.setState({ onLoad: true });
-      //window.location.reload();
-      document.onload = function() {
-        document.getElementById("default").focus();
-      };
+    if (window.screen.width > 630 || this.state.search_ready) {
+      let search = document.getElementById("search").value;
+      if (search) {
+        history.push("/verMais/descritive_search/" + search);
+        this.setState({ onLoad: true });
+        //window.location.reload();
+        document.onload = function() {
+          document.getElementById("default").focus();
+        };
+      }
+    } else {
+      let logo = document.getElementsByClassName("logo")[0];
+      logo.style = "display: none;";
+      let search = document.getElementById("search");
+      search.style = "display: inline-block !important; opacity: 1 !important;";
+      let space = document.getElementsByClassName("space-80")[0];
+      space.style = "margin-left: 0px;";
+      search.focus();
+      this.setState({ search_ready: true });
     }
   };
 }
+
+window.addEventListener("popstate", e => {
+  alert("You pressed the back button!");
+  alert(e);
+});
 
 NavBar.propTypes = {
   getMoreReceitas: PropTypes.func.isRequired,

@@ -1,9 +1,15 @@
+@font-face {
+  font-family: "Raleway", sans-serif;
+  src: url("https://fonts.googleapis.com/css?family=Raleway");
+}
+
 * {
   padding: 0;
   margin: 0;
   vertical-align: baseline;
   list-style: none;
   border: 0;
+  font-family: "Raleway", sans-serif;
 }
 
 body,
@@ -11,18 +17,12 @@ html {
   overflow-x: hidden;
   margin: 0px;
   padding: 0px;
-  font-family: "Raleway", sans-serif;
   background-color: #f0f0f0;
   -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 1.5s; /* Firefox < 16 */
   -ms-animation: fadein 1.5s; /* Internet Explorer */
   -o-animation: fadein 1.5s; /* Opera < 12.1 */
   animation: fadein 1.5s;
-}
-
-@font-face {
-  font-family: "Raleway", sans-serif;
-  src: url("https://fonts.googleapis.com/css?family=Raleway");
 }
 
 @font-face {
@@ -153,6 +153,10 @@ a {
   outline: 0;
 }
 
+.space-80 {
+  margin-left: 80px;
+}
+
 .search-btn {
   cursor: pointer;
   background: "none";
@@ -185,10 +189,11 @@ a {
   cursor: pointer;
   font-size: 18px !important;
   font-weight: 800;
-  transition: 0.3s;
+  transition: 0.15s;
 }
 
-.badge-info:hover {
+.badge-info:hover,
+.badge-info:active {
   filter: drop-shadow(-4px 5px 5px rgba(0, 0, 0, 0.7));
 }
 
@@ -203,9 +208,8 @@ a {
   position: absolute;
   z-index: 1;
   bottom: 150%;
-  left: 50%;
-  margin-left: -80px;
-  font-family: sans-serif;
+  margin-left: -5.6rem;
+  font-family: "Raleway", sans-serif;
   font-size: 16px;
 }
 
@@ -214,13 +218,13 @@ a {
   position: absolute;
   top: 100%;
   left: 50%;
-  margin-left: -5px;
   border-width: 5px;
   border-style: solid;
   border-color: rgba(85, 85, 85, 0.8) transparent transparent transparent;
 }
 
-.badge-info:hover .tooltiptext {
+.badge-info:hover .tooltiptext,
+.badge-info:active .tooltiptext {
   visibility: visible;
 }
 
@@ -246,7 +250,7 @@ a {
 /* Style the header */
 .header {
   background-color: #ff8c00;
-  padding: 30px 40px;
+  padding: 30px 0px 30px 30px;
   color: white;
   text-align: center;
 }
@@ -334,6 +338,10 @@ input {
   /* ie6-9 */
 }
 
+.fa {
+  font-weight: 100 !important;
+}
+
 .logo {
   width: 70px;
   height: 35px;
@@ -354,13 +362,32 @@ form {
   margin-left: 20%;
 }
 
+.show-mobile {
+  display: none !important;
+}
+
+.big {
+  font-size: 22px !important;
+  margin-top: 4px;
+}
+
+@media only screen and (max-width: 1024px) {
+  #search {
+    width: 75%;
+  }
+}
+
 @media only screen and (max-width: 990px) {
   .hide-mobile {
     display: none;
   }
 
-  .search-btn {
-    display: none;
+  #myInput {
+    width: 55%;
+  }
+
+  #arrow-right {
+    margin-right: 0x !important;
   }
 
   .display-container img {
@@ -373,11 +400,73 @@ form {
 }
 
 @media only screen and (max-width: 760px) {
-  .partial-hide-mobile {
-    width: 60%;
-  }
   .display-container img {
     height: 55vw !important;
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .hide-mobile {
+    display: none;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+
+  .sign-in {
+    display: none;
+  }
+
+  .display-container img {
+    height: 55vw !important;
+  }
+
+  #search {
+    display: none;
+    /* border-radius: 100px 0 0 100px; */
+    height: 30px !important;
+    width: 180px !important;
+    background: none;
+    margin-right: -7vh;
+    outline: 0;
+    padding-left: 0px;
+    border-radius: 0px;
+    border-bottom: 1px solid black;
+    animation: slidein 0.6s;
+  }
+
+  #search:active .search-btn {
+    margin-left: 0px;
+  }
+
+  @keyframes slidein {
+    from {
+      width: 0px;
+    }
+    to {
+      width: 180px;
+    }
+  }
+
+  .search-btn {
+    background: none;
+    font-size: 22px !important;
+    right: 0px !important;
+    /* bottom: 10px !important; */
+    top: 0px !important;
+    margin-left: 8vh;
+  }
+
+  .search-btn:before {
+    border: padding;
+    border-right-color: none;
+    position: relative;
+    content: none;
+  }
+
+  #search {
+    width: 90%;
   }
 
   .modal-close {
@@ -385,7 +474,7 @@ form {
     top: 0 !important;
     left: 0 !important;
     margin: 0px !important;
-    padding: 0px 100% 4px 15px !important;
+    padding: 0px 150% 4px 15px !important;
     font-size: 28px !important;
     font-weight: 100 !important;
     background-color: #ffffff;
@@ -571,7 +660,7 @@ button.hover-orange:hover {
 }
 
 .text-red {
-  color: #f44336 !important;
+  color: red !important;
 }
 
 .text-white {
@@ -583,7 +672,7 @@ button.hover-orange:hover {
 }
 
 .text-white-hover-red:hover {
-  color: #f44336;
+  color: red;
 }
 
 .text-blue {
@@ -908,6 +997,10 @@ span.logout:hover {
   background-color: #ff8c00;
   border-radius: 3px 3px 0 0;
   text-align: center;
+}
+
+.badge-danger {
+  background-color: red !important;
 }
 
 .modal {

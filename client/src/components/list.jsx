@@ -20,9 +20,9 @@ class List extends React.Component {
             <div>
               <input type="text" id="myInput" placeholder="Digite um item..." />
               <span onClick={this.newElement} className="addBtn">
-                <i className="fa fa-arrow-right" />
+                <i className="fa fa-arrow-right" id="arrow-right" />
               </span>
-              <div style={{ marginLeft: "90%", paddingTop: "10px" }}>
+              <div style={{ marginRight: "0px", paddingTop: "10px" }}>
                 <span className="badge-info">
                   <i className="fa fa-question">
                     <span
