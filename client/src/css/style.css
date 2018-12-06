@@ -495,10 +495,6 @@ form {
     border-radius: 0px;
   }
 
-  .modal {
-    overflow-x: hidden !important;
-  }
-
   .modal-image {
     margin-top: 30px;
   }
@@ -1028,6 +1024,7 @@ span.logout:hover {
   background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
   -webkit-animation: opacity 0.1s;
   animation: opacity 0.2s;
+  overflow-x: hidden !important;
 }
 
 @keyframes opacity {

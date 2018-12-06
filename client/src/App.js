@@ -16,6 +16,7 @@ class App extends Component {
         }}
       >
         <NavBar />
+        {/* ClassName=row é usada nos efeitos de search e modal */}
         <div className="row">
           <div className="col-md-6 col-sm-12">
             <h3 className="mb-0">O exclusivo sistema de busca para você!</h3>

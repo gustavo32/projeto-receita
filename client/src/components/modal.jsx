@@ -12,6 +12,15 @@ class Modal extends React.Component {
       if (this.props.item && this.props.item.modalIsOpened && e.keyCode === 27)
         this.close();
     });
+    if (this.props.item.modalIsOpened) {
+      window.addEventListener("popstate", e => {
+        e.preventDefault();
+        this.close();
+      });
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener("blur", null, false);
   }
   render() {
     if (this.props.item.modalIsOpened) {

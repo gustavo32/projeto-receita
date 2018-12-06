@@ -117,9 +117,6 @@ class NavBar extends React.Component {
     }
   };
 }
-// window.addEventListener("popstate", e => {
-
-// });
 
 NavBar.propTypes = {
   getMoreReceitas: PropTypes.func.isRequired,
