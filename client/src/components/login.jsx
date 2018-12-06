@@ -50,7 +50,7 @@ class Login extends React.Component {
               <li>
                 <Facebook className="facebook" />
               </li>
-              <li>
+              <li className="disabled">
                 <Google />
               </li>
               <hr />

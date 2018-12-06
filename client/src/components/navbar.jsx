@@ -19,6 +19,35 @@ class NavBar extends React.Component {
       if (inputValue && inputValue.focus && e.keyCode === 13)
         this.searchInput();
     });
+    if (window.screen.width <= 630) {
+      let logo = document.getElementsByClassName("logo")[0];
+      let search = document.getElementById("search");
+      let space = document.getElementsByClassName("space-80")[0];
+      let row = document.getElementsByClassName("row")[0];
+      let searchBtn = document.getElementsByClassName("search-btn")[0];
+      searchBtn.addEventListener(
+        "focus",
+        () => {
+          logo.style = "display: none;";
+          search.style = "display: inline-block !important;";
+          space.style = "margin-left: 0px;";
+          search.focus();
+          this.setState({ search_ready: true });
+        },
+        true
+      );
+
+      row.addEventListener(
+        "click",
+        () => {
+          logo.style = "display: inline-block;";
+          search.style = "display: none !important;";
+          space.style = "margin-left: 80px;";
+          this.setState({ search_ready: false });
+        },
+        true
+      );
+    }
   }
 
   componentDidUpdate() {
@@ -44,9 +73,12 @@ class NavBar extends React.Component {
             />
           </Link>
           <div className="space-80">
-            <input type="search" id="search" placeholder="Pesquisar..." />
+            <input type="search test" id="search" placeholder="Pesquisar..." />
 
-            <button className="search-btn" onClick={() => this.searchInput()}>
+            <button
+              className="search-btn test"
+              onClick={() => this.searchInput()}
+            >
               <i className="fa fa-search" aria-hidden="true" />
             </button>
           </div>
@@ -82,23 +114,12 @@ class NavBar extends React.Component {
           document.getElementById("default").focus();
         };
       }
-    } else {
-      let logo = document.getElementsByClassName("logo")[0];
-      logo.style = "display: none;";
-      let search = document.getElementById("search");
-      search.style = "display: inline-block !important; opacity: 1 !important;";
-      let space = document.getElementsByClassName("space-80")[0];
-      space.style = "margin-left: 0px;";
-      search.focus();
-      this.setState({ search_ready: true });
     }
   };
 }
+// window.addEventListener("popstate", e => {
 
-window.addEventListener("popstate", e => {
-  alert("You pressed the back button!");
-  alert(e);
-});
+// });
 
 NavBar.propTypes = {
   getMoreReceitas: PropTypes.func.isRequired,

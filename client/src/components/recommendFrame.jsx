@@ -52,7 +52,7 @@ class RecommendFrame extends React.Component {
               }}
               onClick={() => this.props.openModal(this.props)}
             />
-            <div
+            {/* <div
               className="display-topright display-hover off"
               style={{ right: 65 }}
             >
@@ -63,7 +63,7 @@ class RecommendFrame extends React.Component {
               >
                 <i className="fa fa-share-alt text-blue" />
               </button>
-            </div>
+            </div> */}
             <div className="hide-mobile">
               {this.tempo()}
               {this.displayText()}
