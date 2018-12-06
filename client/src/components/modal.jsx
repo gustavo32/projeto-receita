@@ -14,7 +14,7 @@ class Modal extends React.Component {
     });
     if (this.props.item.modalIsOpened) {
       window.addEventListener("popstate", e => {
-        e.preventDefault();
+        // e.preventDefault();
         this.close();
       });
     }

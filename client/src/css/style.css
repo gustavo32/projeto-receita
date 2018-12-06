@@ -410,12 +410,35 @@ form {
     display: none;
   }
 
+  .background-cadastro {
+    background-image: url("../imagens/mobile-background-image.jpg") !important;
+    background-size: 40rem !important;
+  }
+
   .show-mobile {
     display: block !important;
   }
 
   .sign-in {
     display: none;
+  }
+
+  .cadastro {
+    height: 80% !important;
+    width: 90vw !important;
+    margin: 180px auto 180px !important;
+  }
+
+  .cadastro input {
+    width: 75vw !important;
+  }
+
+  .cadastro-content {
+    margin: 7vw !important;
+  }
+
+  .signup-btn {
+    margin: 15px 23vw 0px !important;
   }
 
   .display-container img {
@@ -591,7 +614,7 @@ hr {
 .text-preparo {
   font-size: 18px;
   margin: 0 2rem 1rem 2rem;
-  font-weight: 200;
+  font-weight: 400;
   list-style-type: decimal;
   text-align: justify;
 }
@@ -947,8 +970,8 @@ span.logout:hover {
 }
 
 .cadastro {
-  height: 450px;
-  width: 400px;
+  height: 28rem;
+  width: 25rem;
   margin: 15rem auto 18.5rem;
   background-color: white;
   border-radius: 4px;
