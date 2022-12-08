@@ -21,7 +21,7 @@
     "compass": "^0.1.1",
     "concurrently": "^4.0.1",
     "encoding": "^0.1.12",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "install": "^0.12.1",
     "merge": "^1.2.1",
     "mongoose": "^5.2.12",
